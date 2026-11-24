@@ -25,8 +25,8 @@ interface AcquisitionDrawerProps {
   whatsappNumber: string;
   onChangeWhatsAppNumber: (nextNumber: string) => void;
   onClose: () => void;
-  onUpdateQuantity: (watchId: string, delta: number) => void;
-  onRemoveItem: (watchId: string) => void;
+  onUpdateQuantity: (cartKey: string, delta: number) => void;
+  onRemoveItem: (cartKey: string) => void;
   onClearBag: () => void;
 }
 
@@ -68,9 +68,13 @@ export function AcquisitionDrawer({
       .map((item) => {
         const watch = timepieces.find((w) => w.id === item.watchId);
         if (!watch) return null;
+        const variant =
+          watch.variants.find((v) => v.id === item.variantId) ??
+          watch.variants[0];
         return {
           ...item,
           watch,
+          variant,
           unitPrice: watch.priceCop,
           lineTotal: watch.priceCop * item.quantity,
         };
@@ -97,7 +101,7 @@ export function AcquisitionDrawer({
 
     const lines = resolvedItems.map(
       (i) =>
-        `• ${i.quantity}x ${i.watch.name} (${i.watch.reference}) — ${formatCop(
+        `• ${i.quantity}x ${i.variant.productName} (${i.watch.reference}) — ${formatCop(
           i.lineTotal
         )}`
     );
@@ -155,16 +159,26 @@ export function AcquisitionDrawer({
       <aside className="flex h-full w-full max-w-[500px] flex-col border-l border-white/[0.12] bg-[#0a0a0b]">
         {/* Cabecera */}
         <div className="flex items-center justify-between border-b border-white/[0.08] px-6 py-4">
-          <div>
-            <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[#94a3b8]">
-              Barrtime · Barranquilla
-            </p>
-            <h2
-              id="bag-drawer-title"
-              className="text-[17px] font-normal text-white"
-            >
-              Bolsa de Compra
-            </h2>
+          <div className="flex items-center gap-3">
+            <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full">
+              <img
+                src="/assets/aistudio/logobarrtime_194bfff8.jpeg"
+                alt="Emblema Barrtime"
+                referrerPolicy="no-referrer"
+                className="pointer-events-none absolute left-1/2 top-[-26.6%] h-[210%] w-[210%] max-w-none -translate-x-1/2 object-contain mix-blend-lighten brightness-[0.9] contrast-[1.35]"
+              />
+            </span>
+            <div>
+              <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[#94a3b8]">
+                Barrtime · Barranquilla
+              </p>
+              <h2
+                id="bag-drawer-title"
+                className="text-[17px] font-normal text-white"
+              >
+                Bolsa de Compra
+              </h2>
+            </div>
           </div>
 
           <button
@@ -185,7 +199,7 @@ export function AcquisitionDrawer({
                 Tu bolsa de compra está vacía.
               </p>
               <p className="mt-2 max-w-xs text-[13px] font-light leading-[1.6] text-[#94a3b8]">
-                Explora la colección y agrega tus relojes favoritos para finalizar la compra directamente por WhatsApp.
+                Desliza las imágenes de tu reloj favorito y añádelo para finalizar la compra por WhatsApp.
               </p>
             </div>
           ) : (
@@ -194,14 +208,13 @@ export function AcquisitionDrawer({
               <div className="space-y-3">
                 {resolvedItems.map((item) => (
                   <div
-                    key={item.watchId}
+                    key={item.cartKey}
                     className="flex gap-4 rounded-[4px] border border-white/[0.08] bg-[#121214] p-4"
                   >
                     <div className="h-24 w-24 shrink-0 overflow-hidden rounded-[4px] border border-white/[0.08]">
                       <WatchImageChamber
-                        src={item.watch.image}
-                        images={item.watch.images}
-                        alt={item.watch.name}
+                        variants={[item.variant]}
+                        alt={item.variant.productName}
                         reference={item.watch.reference}
                         showControls={false}
                       />
@@ -215,29 +228,34 @@ export function AcquisitionDrawer({
                               {item.watch.reference}
                             </p>
                             <h3 className="mt-0.5 text-[14px] font-medium text-white">
-                              {item.watch.name}
+                              {item.variant.productName}
                             </h3>
                           </div>
                           <button
                             type="button"
-                            onClick={() => onRemoveItem(item.watchId)}
-                            aria-label={`Eliminar ${item.watch.name}`}
+                            onClick={() => onRemoveItem(item.cartKey)}
+                            aria-label={`Eliminar ${item.variant.productName}`}
                             className="text-[#94a3b8] hover:text-white cursor-pointer"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
                           </button>
                         </div>
 
-                        <p className="mt-1 text-[12px] font-light text-[#94a3b8]">
-                          {item.watch.specs.diameter} · {item.watch.specs.movement}
-                        </p>
+                        <div className="mt-1.5 flex items-center gap-2 text-[12px] text-[#e2e8f0]">
+                          <span
+                            aria-hidden="true"
+                            className="h-2.5 w-2.5 rounded-full border border-white/25"
+                            style={{ backgroundColor: item.variant.swatchHex }}
+                          />
+                          <span>Color: {item.variant.colorName}</span>
+                        </div>
                       </div>
 
                       <div className="mt-3 flex items-center justify-between gap-2">
                         <div className="inline-flex items-center rounded-[4px] border border-white/[0.12] bg-[#0a0a0b]">
                           <button
                             type="button"
-                            onClick={() => onUpdateQuantity(item.watchId, -1)}
+                            onClick={() => onUpdateQuantity(item.cartKey, -1)}
                             aria-label="Reducir cantidad"
                             className="flex h-7 w-7 items-center justify-center text-[#94a3b8] hover:text-white cursor-pointer"
                           >
@@ -248,7 +266,7 @@ export function AcquisitionDrawer({
                           </span>
                           <button
                             type="button"
-                            onClick={() => onUpdateQuantity(item.watchId, 1)}
+                            onClick={() => onUpdateQuantity(item.cartKey, 1)}
                             aria-label="Aumentar cantidad"
                             className="flex h-7 w-7 items-center justify-center text-[#94a3b8] hover:text-white cursor-pointer"
                           >

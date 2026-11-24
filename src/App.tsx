@@ -8,9 +8,9 @@ import { HeroShowcase } from './components/HeroShowcase';
 import { Navbar } from './components/Navbar';
 import { TimepieceDetailModal } from './components/TimepieceDetailModal';
 import { DEFAULT_WHATSAPP_NUMBER, TIMEPIECES } from './data/horologyData';
-import { CartItem, Timepiece } from './types/horology';
+import { CartItem, Timepiece, WatchColorVariant } from './types/horology';
 
-const STORAGE_CART_KEY = 'barrtime_bag_cop_v1';
+const STORAGE_CART_KEY = 'barrtime_bag_variants_v1';
 const STORAGE_WHATSAPP_KEY = 'barrtime_whatsapp_v1';
 
 export default function App() {
@@ -32,7 +32,10 @@ export default function App() {
     }
   });
 
-  const [inspectedWatch, setInspectedWatch] = useState<Timepiece | null>(null);
+  const [inspectedSelection, setInspectedSelection] = useState<{
+    watch: Timepiece;
+    variantIndex: number;
+  } | null>(null);
   const [compareIds, setCompareIds] = useState<string[]>([]);
   const [isCompareOpen, setIsCompareOpen] = useState(false);
   const [isBagOpen, setIsBagOpen] = useState(false);
@@ -72,27 +75,40 @@ export default function App() {
     [compareIds]
   );
 
-  const handleAddToBag = (watch: Timepiece) => {
+  const handleInspectWatch = (watch: Timepiece, variantIndex: number = 0) => {
+    setInspectedSelection({ watch, variantIndex });
+  };
+
+  const handleAddToBag = (watch: Timepiece, variant: WatchColorVariant) => {
+    const cartKey = `${watch.id}__${variant.id}`;
     setCartItems((prev) => {
-      const existing = prev.find((item) => item.watchId === watch.id);
+      const existing = prev.find((item) => item.cartKey === cartKey);
       if (existing) {
         return prev.map((item) =>
-          item.watchId === watch.id
+          item.cartKey === cartKey
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       }
-      return [...prev, { watchId: watch.id, quantity: 1 }];
+      return [
+        ...prev,
+        {
+          cartKey,
+          watchId: watch.id,
+          variantId: variant.id,
+          quantity: 1,
+        },
+      ];
     });
 
-    setToastMessage(`${watch.name} añadido a tu bolsa`);
+    setToastMessage(`${variant.productName} añadido a tu bolsa`);
   };
 
-  const handleUpdateQuantity = (watchId: string, delta: number) => {
+  const handleUpdateQuantity = (cartKey: string, delta: number) => {
     setCartItems((prev) =>
       prev
         .map((item) =>
-          item.watchId === watchId
+          item.cartKey === cartKey
             ? { ...item, quantity: item.quantity + delta }
             : item
         )
@@ -100,8 +116,8 @@ export default function App() {
     );
   };
 
-  const handleRemoveItem = (watchId: string) => {
-    setCartItems((prev) => prev.filter((item) => item.watchId !== watchId));
+  const handleRemoveItem = (cartKey: string) => {
+    setCartItems((prev) => prev.filter((item) => item.cartKey !== cartKey));
   };
 
   const handleToggleCompare = (watchId: string) => {
@@ -124,9 +140,25 @@ export default function App() {
       <main>
         <HeroShowcase
           flagship={flagshipWatch}
-          onInspectFlagship={setInspectedWatch}
+          onInspectFlagship={handleInspectWatch}
           onQuickAddFlagship={handleAddToBag}
         />
+
+        {/* Sello editorial centrado de la marca */}
+        <div className="border-b border-white/[0.08] bg-[#0a0a0b] py-10 md:py-12">
+          <div className="mx-auto flex max-w-[1440px] items-center gap-6 px-5 md:gap-12 md:px-10 lg:px-16">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/[0.1] to-white/[0.18]" />
+            <div className="h-36 w-36 shrink-0 md:h-44 md:w-44">
+              <img
+                src="/assets/aistudio/logobarrtime_194bfff8.jpeg"
+                alt="Barrtime — Alta Relojería"
+                referrerPolicy="no-referrer"
+                className="h-full w-full object-contain mix-blend-lighten brightness-[0.9] contrast-[1.35]"
+              />
+            </div>
+            <div className="h-px flex-1 bg-gradient-to-l from-transparent via-white/[0.1] to-white/[0.18]" />
+          </div>
+        </div>
 
         <CollectionSection
           timepieces={TIMEPIECES}
@@ -134,7 +166,7 @@ export default function App() {
           onToggleCompare={handleToggleCompare}
           onOpenCompare={() => setIsCompareOpen(true)}
           onClearCompare={() => setCompareIds([])}
-          onInspectWatch={setInspectedWatch}
+          onInspectWatch={handleInspectWatch}
           onQuickAdd={handleAddToBag}
         />
       </main>
@@ -142,9 +174,10 @@ export default function App() {
       <ConciergeFooter whatsappNumber={whatsappNumber} />
 
       <TimepieceDetailModal
-        watch={inspectedWatch}
+        watch={inspectedSelection?.watch ?? null}
+        initialVariantIndex={inspectedSelection?.variantIndex ?? 0}
         whatsappNumber={whatsappNumber}
-        onClose={() => setInspectedWatch(null)}
+        onClose={() => setInspectedSelection(null)}
         onAddToBag={handleAddToBag}
       />
 
@@ -153,7 +186,7 @@ export default function App() {
         watches={comparedWatches}
         onClose={() => setIsCompareOpen(false)}
         onRemoveCompare={handleToggleCompare}
-        onInspectWatch={setInspectedWatch}
+        onInspectWatch={handleInspectWatch}
         onQuickAdd={handleAddToBag}
       />
 

@@ -1,7 +1,7 @@
 import { X } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { formatCop } from '../data/horologyData';
-import { Timepiece } from '../types/horology';
+import { Timepiece, WatchColorVariant } from '../types/horology';
 import { WatchImageChamber } from './WatchImageChamber';
 
 interface CompareModalProps {
@@ -9,8 +9,8 @@ interface CompareModalProps {
   watches: Timepiece[];
   onClose: () => void;
   onRemoveCompare: (id: string) => void;
-  onInspectWatch: (watch: Timepiece) => void;
-  onQuickAdd: (watch: Timepiece) => void;
+  onInspectWatch: (watch: Timepiece, variantIndex: number) => void;
+  onQuickAdd: (watch: Timepiece, variant: WatchColorVariant) => void;
 }
 
 export function CompareModal({
@@ -21,6 +21,10 @@ export function CompareModal({
   onInspectWatch,
   onQuickAdd,
 }: CompareModalProps) {
+  const [selectedByWatch, setSelectedByWatch] = useState<Record<string, number>>(
+    {}
+  );
+
   useEffect(() => {
     if (!isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -72,32 +76,45 @@ export function CompareModal({
                 <th className="w-44 py-4 pr-4 align-bottom text-[11px] font-medium uppercase tracking-[0.16em] text-[#94a3b8]">
                   Especificación
                 </th>
-                {watches.map((watch) => (
-                  <th key={watch.id} className="min-w-[210px] px-4 py-4 align-top">
-                    <div className="relative overflow-hidden rounded-[4px] border border-white/[0.08]">
-                      <WatchImageChamber
-                        src={watch.image}
-                        alt={watch.name}
-                        reference={watch.reference}
-                        aspectClass="aspect-square"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => onRemoveCompare(watch.id)}
-                        aria-label={`Quitar ${watch.name}`}
-                        className="absolute top-2 right-2 flex h-7 w-7 items-center justify-center rounded-[4px] border border-white/15 bg-[#0a0a0b]/80 text-[#e2e8f0] hover:border-white/40 cursor-pointer"
-                      >
-                        <X className="h-3.5 w-3.5" />
-                      </button>
-                    </div>
-                    <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-[#94a3b8]">
-                      {watch.reference}
-                    </div>
-                    <div className="mt-1 text-[16px] font-medium text-white">
-                      {watch.name}
-                    </div>
-                  </th>
-                ))}
+                {watches.map((watch) => {
+                  const selectedIdx = selectedByWatch[watch.id] ?? 0;
+                  const activeVariant =
+                    watch.variants[selectedIdx] ?? watch.variants[0];
+
+                  return (
+                    <th key={watch.id} className="min-w-[210px] px-4 py-4 align-top">
+                      <div className="relative overflow-hidden rounded-[4px] border border-white/[0.08]">
+                        <WatchImageChamber
+                          variants={watch.variants}
+                          selectedIndex={selectedIdx}
+                          onSelectIndex={(idx) =>
+                            setSelectedByWatch((prev) => ({
+                              ...prev,
+                              [watch.id]: idx,
+                            }))
+                          }
+                          alt={activeVariant.productName}
+                          reference={watch.reference}
+                          aspectClass="aspect-square"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => onRemoveCompare(watch.id)}
+                          aria-label={`Quitar ${activeVariant.productName}`}
+                          className="absolute top-2 right-2 z-20 flex h-7 w-7 items-center justify-center rounded-[4px] border border-white/15 bg-[#0a0a0b]/80 text-[#e2e8f0] hover:border-white/40 cursor-pointer"
+                        >
+                          <X className="h-3.5 w-3.5" />
+                        </button>
+                      </div>
+                      <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-[#94a3b8]">
+                        {watch.reference}
+                      </div>
+                      <div className="mt-1 text-[16px] font-medium text-white">
+                        {activeVariant.productName}
+                      </div>
+                    </th>
+                  );
+                })}
               </tr>
             </thead>
             <tbody className="divide-y divide-white/[0.08]">
@@ -111,6 +128,18 @@ export function CompareModal({
                     {formatCop(w.priceCop)}
                   </td>
                 ))}
+              </tr>
+              <tr>
+                <td className="py-3.5 pr-4 text-[#94a3b8]">Color actual</td>
+                {watches.map((w) => {
+                  const idx = selectedByWatch[w.id] ?? 0;
+                  const active = w.variants[idx] ?? w.variants[0];
+                  return (
+                    <td key={w.id} className="px-4 py-3.5 text-[#e2e8f0]">
+                      {active.colorName}
+                    </td>
+                  );
+                })}
               </tr>
               <tr>
                 <td className="py-3.5 pr-4 text-[#94a3b8]">Movimiento</td>
@@ -151,14 +180,6 @@ export function CompareModal({
                 ))}
               </tr>
               <tr>
-                <td className="py-3.5 pr-4 text-[#94a3b8]">Cristal</td>
-                {watches.map((w) => (
-                  <td key={w.id} className="px-4 py-3.5 text-[#e2e8f0]">
-                    {w.specs.crystal}
-                  </td>
-                ))}
-              </tr>
-              <tr>
                 <td className="py-3.5 pr-4 text-[#94a3b8]">Hermeticidad</td>
                 {watches.map((w) => (
                   <td
@@ -171,29 +192,33 @@ export function CompareModal({
               </tr>
               <tr>
                 <td className="py-4 pr-4 text-[#94a3b8]">Acción</td>
-                {watches.map((w) => (
-                  <td key={w.id} className="px-4 py-4">
-                    <div className="flex flex-col gap-2">
-                      <button
-                        type="button"
-                        onClick={() => onQuickAdd(w)}
-                        className="h-9 rounded-[4px] bg-white px-3 text-[11px] font-medium uppercase tracking-[0.14em] text-[#0a0a0b] hover:bg-[#e2e8f0] cursor-pointer"
-                      >
-                        Añadir a Bolsa
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          onClose();
-                          onInspectWatch(w);
-                        }}
-                        className="h-9 rounded-[4px] border border-white/[0.15] px-3 text-[11px] font-medium uppercase tracking-[0.14em] text-[#e2e8f0] hover:border-white/40 cursor-pointer"
-                      >
-                        Ver Detalles
-                      </button>
-                    </div>
-                  </td>
-                ))}
+                {watches.map((w) => {
+                  const idx = selectedByWatch[w.id] ?? 0;
+                  const active = w.variants[idx] ?? w.variants[0];
+                  return (
+                    <td key={w.id} className="px-4 py-4">
+                      <div className="flex flex-col gap-2">
+                        <button
+                          type="button"
+                          onClick={() => onQuickAdd(w, active)}
+                          className="h-9 rounded-[4px] bg-white px-3 text-[11px] font-medium uppercase tracking-[0.14em] text-[#0a0a0b] hover:bg-[#e2e8f0] cursor-pointer"
+                        >
+                          Añadir a Bolsa
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            onClose();
+                            onInspectWatch(w, idx);
+                          }}
+                          className="h-9 rounded-[4px] border border-white/[0.15] px-3 text-[11px] font-medium uppercase tracking-[0.14em] text-[#e2e8f0] hover:border-white/40 cursor-pointer"
+                        >
+                          Ver Detalles
+                        </button>
+                      </div>
+                    </td>
+                  );
+                })}
               </tr>
             </tbody>
           </table>

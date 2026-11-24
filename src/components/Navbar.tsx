@@ -18,12 +18,20 @@ export function Navbar({ cartCount, onOpenBag }: NavbarProps) {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-white/[0.08] smoked-glass">
       <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-8 px-5 md:px-10 lg:px-16">
-        {/* Zona 1: Marca BARRTIME */}
+        {/* Zona 1: Marca BARRTIME con emblema */}
         <a
           href="#inicio"
-          className="whitespace-nowrap shrink-0 text-[15px] font-medium tracking-[0.22em] text-white uppercase transition-opacity duration-150 hover:opacity-80 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#e2e8f0]"
+          className="flex items-center gap-3 whitespace-nowrap shrink-0 text-[15px] font-medium tracking-[0.24em] text-white uppercase transition-opacity duration-150 hover:opacity-85 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#e2e8f0]"
         >
-          BARRTIME
+          <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full">
+            <img
+              src="/assets/aistudio/logobarrtime_194bfff8.jpeg"
+              alt="Emblema Barrtime"
+              referrerPolicy="no-referrer"
+              className="pointer-events-none absolute left-1/2 top-[-26.6%] h-[210%] w-[210%] max-w-none -translate-x-1/2 object-contain mix-blend-lighten brightness-[0.9] contrast-[1.35]"
+            />
+          </span>
+          <span>BARRTIME</span>
         </a>
 
         {/* Zona 2: Enlaces sin calibres ni taller */}

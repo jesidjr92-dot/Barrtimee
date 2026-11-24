@@ -1,10 +1,11 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useRef, useState } from 'react';
-import { WatchImageSlide } from '../types/horology';
+import { WatchColorVariant } from '../types/horology';
 
 interface WatchImageChamberProps {
-  src: string;
-  images?: WatchImageSlide[];
+  variants: WatchColorVariant[];
+  selectedIndex?: number;
+  onSelectIndex?: (index: number) => void;
   alt: string;
   reference: string;
   aspectClass?: string;
@@ -15,8 +16,9 @@ interface WatchImageChamberProps {
 }
 
 export function WatchImageChamber({
-  src,
-  images,
+  variants,
+  selectedIndex,
+  onSelectIndex,
   alt,
   reference,
   aspectClass = 'aspect-square',
@@ -25,10 +27,7 @@ export function WatchImageChamber({
   showControls = true,
   onImageClick,
 }: WatchImageChamberProps) {
-  const slides: WatchImageSlide[] =
-    images && images.length > 0 ? images : [{ src, label: 'Vista principal' }];
-
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [internalIndex, setInternalIndex] = useState(0);
   const [failedSlides, setFailedSlides] = useState<Record<number, boolean>>({});
   const [dragOffsetPx, setDragOffsetPx] = useState(0);
 
@@ -36,12 +35,18 @@ export function WatchImageChamber({
   const didDrag = useRef(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const safeIndex = Math.min(activeIndex, slides.length - 1);
-  const hasMultiple = slides.length > 1;
+  const currentIndex =
+    selectedIndex !== undefined ? selectedIndex : internalIndex;
+  const safeIndex = Math.max(0, Math.min(currentIndex, variants.length - 1));
+  const hasMultiple = variants.length > 1;
 
-  const goToSlide = (nextIdx: number) => {
-    const wrapped = (nextIdx + slides.length) % slides.length;
-    setActiveIndex(wrapped);
+  const setSlide = (nextIdx: number) => {
+    const wrapped = (nextIdx + variants.length) % variants.length;
+    if (onSelectIndex) {
+      onSelectIndex(wrapped);
+    } else {
+      setInternalIndex(wrapped);
+    }
   };
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -67,9 +72,9 @@ export function WatchImageChamber({
     const threshold = Math.min(55, width * 0.18);
 
     if (dragOffsetPx < -threshold) {
-      goToSlide(safeIndex + 1);
+      setSlide(safeIndex + 1);
     } else if (dragOffsetPx > threshold) {
-      goToSlide(safeIndex - 1);
+      setSlide(safeIndex - 1);
     }
     dragStartX.current = null;
     setDragOffsetPx(0);
@@ -98,7 +103,7 @@ export function WatchImageChamber({
         onImageClick ? 'cursor-pointer' : ''
       } ${hasMultiple ? 'cursor-grab active:cursor-grabbing' : ''} ${className}`}
     >
-      {/* Pista deslizable de imágenes */}
+      {/* Pista deslizable de colores */}
       <div
         className="flex h-full w-full transition-transform duration-300 ease-out"
         style={{
@@ -106,24 +111,24 @@ export function WatchImageChamber({
           transitionDuration: dragStartX.current !== null ? '0ms' : '280ms',
         }}
       >
-        {slides.map((slide, idx) => {
+        {variants.map((variant, idx) => {
           const isFailed = Boolean(failedSlides[idx]);
           return (
             <div
-              key={`${slide.src}-${idx}`}
+              key={`${variant.id}-${idx}`}
               className="relative h-full w-full shrink-0 overflow-hidden"
             >
               {!isFailed ? (
                 <img
-                  src={slide.src}
-                  alt={`${alt} — ${slide.label}`}
+                  src={variant.src}
+                  alt={`${alt} — ${variant.colorName}`}
                   referrerPolicy="no-referrer"
                   loading="lazy"
                   draggable={false}
                   onError={() =>
                     setFailedSlides((prev) => ({ ...prev, [idx]: true }))
                   }
-                  className={`h-full w-full object-cover object-center transition-all duration-300 ease-out scale-[1.22] ${
+                  className={`h-full w-full object-cover transition-all duration-300 ease-out ${
                     lumeMode
                       ? 'brightness-[0.65] contrast-[1.35] saturate-[0.85]'
                       : 'brightness-100 contrast-100'
@@ -163,16 +168,16 @@ export function WatchImageChamber({
         />
       )}
 
-      {/* Controles de deslizamiento (flechas e indicadores circulares) */}
+      {/* Flechas de navegación e indicadores */}
       {hasMultiple && showControls && (
         <>
           <button
             type="button"
             onClick={(e) => {
               e.stopPropagation();
-              goToSlide(safeIndex - 1);
+              setSlide(safeIndex - 1);
             }}
-            aria-label="Imagen anterior"
+            aria-label="Color anterior"
             className="absolute top-1/2 left-2.5 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-[#0a0a0b]/75 text-[#e2e8f0] opacity-100 md:opacity-0 transition-opacity duration-150 hover:border-white/40 hover:text-white group-hover/slider:opacity-100 cursor-pointer"
           >
             <ChevronLeft className="h-4 w-4" aria-hidden="true" />
@@ -182,28 +187,27 @@ export function WatchImageChamber({
             type="button"
             onClick={(e) => {
               e.stopPropagation();
-              goToSlide(safeIndex + 1);
+              setSlide(safeIndex + 1);
             }}
-            aria-label="Imagen siguiente"
+            aria-label="Siguiente color"
             className="absolute top-1/2 right-2.5 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-[#0a0a0b]/75 text-[#e2e8f0] opacity-100 md:opacity-0 transition-opacity duration-150 hover:border-white/40 hover:text-white group-hover/slider:opacity-100 cursor-pointer"
           >
             <ChevronRight className="h-4 w-4" aria-hidden="true" />
           </button>
 
-          {/* Indicadores de diapositiva */}
           <div
             className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-white/10 bg-[#0a0a0b]/70 px-2.5 py-1.5 backdrop-blur-sm"
             onClick={(e) => e.stopPropagation()}
           >
-            {slides.map((slide, idx) => (
+            {variants.map((variant, idx) => (
               <button
-                key={`${slide.label}-${idx}`}
+                key={`${variant.id}-${idx}`}
                 type="button"
-                aria-label={`Ver ${slide.label}`}
+                aria-label={`Ver ${variant.colorName}`}
                 aria-current={idx === safeIndex}
                 onClick={(e) => {
                   e.stopPropagation();
-                  goToSlide(idx);
+                  setSlide(idx);
                 }}
                 className={`h-1.5 rounded-full transition-all duration-150 cursor-pointer ${
                   idx === safeIndex

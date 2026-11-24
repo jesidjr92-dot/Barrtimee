@@ -1,31 +1,39 @@
 import { Check, Eye, MessageCircle, ShieldCheck, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { buildWhatsAppUrl, formatCop } from '../data/horologyData';
-import { Timepiece } from '../types/horology';
+import { Timepiece, WatchColorVariant } from '../types/horology';
 import { WatchImageChamber } from './WatchImageChamber';
 
 interface TimepieceDetailModalProps {
   watch: Timepiece | null;
+  initialVariantIndex: number;
   whatsappNumber: string;
   onClose: () => void;
-  onAddToBag: (watch: Timepiece) => void;
+  onAddToBag: (watch: Timepiece, variant: WatchColorVariant) => void;
 }
 
 export function TimepieceDetailModal({
   watch,
+  initialVariantIndex,
   whatsappNumber,
   onClose,
   onAddToBag,
 }: TimepieceDetailModalProps) {
+  const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
   const [lowLightMode, setLowLightMode] = useState<boolean>(false);
   const [justAdded, setJustAdded] = useState<boolean>(false);
 
   useEffect(() => {
     if (watch) {
+      const safeIdx = Math.max(
+        0,
+        Math.min(initialVariantIndex, watch.variants.length - 1)
+      );
+      setSelectedVariantIdx(safeIdx);
       setLowLightMode(false);
       setJustAdded(false);
     }
-  }, [watch]);
+  }, [watch, initialVariantIndex]);
 
   useEffect(() => {
     if (!watch) return;
@@ -38,13 +46,16 @@ export function TimepieceDetailModal({
 
   if (!watch) return null;
 
+  const activeVariant =
+    watch.variants[selectedVariantIdx] ?? watch.variants[0];
+
   const whatsappUrl = buildWhatsAppUrl(
-    `Hola Barrtime Barranquilla, deseo adquirir el reloj ${watch.name} (${watch.reference}). Precio: ${formatCop(watch.priceCop)}.`,
+    `Hola Barrtime Barranquilla, deseo adquirir el reloj ${activeVariant.productName} (${watch.reference}). Precio: ${formatCop(watch.priceCop)}.`,
     whatsappNumber
   );
 
   const handleAdd = () => {
-    onAddToBag(watch);
+    onAddToBag(watch, activeVariant);
     setJustAdded(true);
     window.setTimeout(() => setJustAdded(false), 1800);
   };
@@ -65,7 +76,7 @@ export function TimepieceDetailModal({
           <div className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.18em] text-[#94a3b8]">
             <span className="font-mono text-[#e2e8f0]">{watch.reference}</span>
             <span aria-hidden="true">·</span>
-            <span>{watch.collection}</span>
+            <span>{activeVariant.colorName}</span>
           </div>
           <button
             type="button"
@@ -83,9 +94,10 @@ export function TimepieceDetailModal({
             <div className="lg:sticky lg:top-20">
               <div className="overflow-hidden rounded-[4px] border border-white/[0.08]">
                 <WatchImageChamber
-                  src={watch.image}
-                  images={watch.images}
-                  alt={watch.name}
+                  variants={watch.variants}
+                  selectedIndex={selectedVariantIdx}
+                  onSelectIndex={setSelectedVariantIdx}
+                  alt={activeVariant.productName}
                   reference={watch.reference}
                   aspectClass="aspect-square"
                   lumeMode={lowLightMode}
@@ -107,13 +119,13 @@ export function TimepieceDetailModal({
                 </button>
 
                 <span className="text-[12px] text-[#94a3b8]">
-                  Desliza para ver más ángulos
+                  Desliza sobre el reloj para cambiar de versión
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Módulo de compra */}
+          {/* Módulo de compra y selección de color */}
           <div className="flex flex-col justify-between p-6 md:p-8 lg:col-span-6">
             <div>
               <div className="flex items-center justify-between gap-4">
@@ -126,7 +138,7 @@ export function TimepieceDetailModal({
                 id="pdp-watch-title"
                 className="mt-2 text-[26px] font-light leading-[1.2] tracking-[-0.02em] text-white md:text-[32px]"
               >
-                {watch.name}
+                {activeVariant.productName}
               </h2>
 
               <div className="mt-4 flex flex-wrap items-baseline gap-3">
@@ -138,12 +150,12 @@ export function TimepieceDetailModal({
                 </span>
               </div>
 
-              <p className="mt-5 text-[14px] font-light leading-[1.7] text-[#c4c7c8]">
+              <p className="mt-4 text-[14px] font-light leading-[1.7] text-[#c4c7c8]">
                 {watch.description}
               </p>
 
               {/* Ficha técnica del reloj */}
-              <div className="mt-8 border-t border-white/[0.08] pt-5">
+              <div className="mt-7 border-t border-white/[0.08] pt-5">
                 <h3 className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#94a3b8]">
                   Especificaciones del Reloj
                 </h3>
@@ -196,10 +208,10 @@ export function TimepieceDetailModal({
                 {justAdded ? (
                   <>
                     <Check className="h-4 w-4" aria-hidden="true" />
-                    <span>Añadido a Bolsa de Compra</span>
+                    <span>Añadido ({activeVariant.colorName})</span>
                   </>
                 ) : (
-                  <span>Añadir a Bolsa · {formatCop(watch.priceCop)}</span>
+                  <span>Añadir a Bolsa · {activeVariant.colorName}</span>
                 )}
               </button>
 
@@ -210,7 +222,7 @@ export function TimepieceDetailModal({
                 className="flex h-11 w-full items-center justify-center gap-2.5 rounded-[4px] border border-[#25d366]/35 bg-[#0f1712] px-6 text-[11px] font-medium uppercase tracking-[0.15em] text-[#25d366] transition-colors hover:border-[#25d366]/70 hover:bg-[#132017]"
               >
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                <span>Comprar por WhatsApp · Barranquilla</span>
+                <span>Comprar por WhatsApp · {activeVariant.colorName}</span>
               </a>
 
               <div className="flex items-center justify-center gap-2 pt-1 text-[11px] text-[#94a3b8]">

@@ -1,6 +1,7 @@
 import { ArrowUpRight, Check, Scale } from 'lucide-react';
+import { useState } from 'react';
 import { formatCop } from '../data/horologyData';
-import { Timepiece } from '../types/horology';
+import { Timepiece, WatchColorVariant } from '../types/horology';
 import { WatchImageChamber } from './WatchImageChamber';
 
 interface CollectionSectionProps {
@@ -9,8 +10,8 @@ interface CollectionSectionProps {
   onToggleCompare: (watchId: string) => void;
   onOpenCompare: () => void;
   onClearCompare: () => void;
-  onInspectWatch: (watch: Timepiece) => void;
-  onQuickAdd: (watch: Timepiece) => void;
+  onInspectWatch: (watch: Timepiece, variantIndex: number) => void;
+  onQuickAdd: (watch: Timepiece, variant: WatchColorVariant) => void;
 }
 
 export function CollectionSection({
@@ -23,6 +24,16 @@ export function CollectionSection({
   onQuickAdd,
 }: CollectionSectionProps) {
   const collectionWatches = timepieces.filter((w) => !w.isFlagship);
+  const [selectedVariantByWatch, setSelectedVariantByWatch] = useState<
+    Record<string, number>
+  >({});
+
+  const getSelectedIndex = (watchId: string) =>
+    selectedVariantByWatch[watchId] ?? 0;
+
+  const setSelectedIndex = (watchId: string, idx: number) => {
+    setSelectedVariantByWatch((prev) => ({ ...prev, [watchId]: idx }));
+  };
 
   return (
     <section
@@ -34,15 +45,15 @@ export function CollectionSection({
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
             <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#94a3b8]">
-              Catálogo
+              Archivo Contemporáneo
             </p>
             <h2 className="mt-2 text-[28px] font-light leading-[1.2] tracking-[-0.025em] text-white md:text-[40px]">
-              Colección
+              La Colección Permanente
             </h2>
           </div>
 
           <p className="max-w-md text-[14px] font-light leading-[1.6] text-[#94a3b8]">
-           Selecciona hasta cuatro referencias para compararlas.
+            Desliza las imágenes de cada reloj para explorar sus versiones y añadir exactamente la pieza que deseas a tu bolsa.
           </p>
         </div>
 
@@ -87,6 +98,10 @@ export function CollectionSection({
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {collectionWatches.map((watch) => {
             const isCompared = compareIds.includes(watch.id);
+            const selectedIdx = getSelectedIndex(watch.id);
+            const activeVariant =
+              watch.variants[selectedIdx] ?? watch.variants[0];
+
             return (
               <article
                 key={watch.id}
@@ -95,12 +110,13 @@ export function CollectionSection({
                 <div>
                   <div className="relative border-b border-white/[0.08]">
                     <WatchImageChamber
-                      src={watch.image}
-                      images={watch.images}
-                      alt={watch.name}
+                      variants={watch.variants}
+                      selectedIndex={selectedIdx}
+                      onSelectIndex={(idx) => setSelectedIndex(watch.id, idx)}
+                      alt={activeVariant.productName}
                       reference={watch.reference}
                       aspectClass="aspect-square"
-                      onImageClick={() => onInspectWatch(watch)}
+                      onImageClick={() => onInspectWatch(watch, selectedIdx)}
                     />
 
                     <button
@@ -132,11 +148,11 @@ export function CollectionSection({
 
                     <button
                       type="button"
-                      onClick={() => onInspectWatch(watch)}
+                      onClick={() => onInspectWatch(watch, selectedIdx)}
                       className="mt-2.5 block text-left focus-visible:outline-none cursor-pointer"
                     >
-                      <h3 className="text-[18px] font-medium leading-[1.35] text-white transition-colors group-hover:text-[#e2e8f0]">
-                        {watch.name}
+                      <h3 className="min-h-[48px] text-[18px] font-medium leading-[1.35] text-white transition-colors group-hover:text-[#e2e8f0]">
+                        {activeVariant.productName}
                       </h3>
                     </button>
 
@@ -144,7 +160,7 @@ export function CollectionSection({
                       {watch.collection} · {watch.category}
                     </p>
 
-                    <dl className="mt-5 grid grid-cols-3 gap-2 border-y border-white/[0.08] py-3 text-[12px]">
+                    <dl className="mt-4 grid grid-cols-3 gap-2 border-y border-white/[0.08] py-3 text-[12px]">
                       <div>
                         <dt className="text-[10px] uppercase tracking-[0.14em] text-[#94a3b8]">
                           Caja
@@ -185,7 +201,7 @@ export function CollectionSection({
                 <div className="grid grid-cols-2 border-t border-white/[0.08]">
                   <button
                     type="button"
-                    onClick={() => onInspectWatch(watch)}
+                    onClick={() => onInspectWatch(watch, selectedIdx)}
                     className="flex h-11 items-center justify-center gap-1.5 border-r border-white/[0.08] px-3 text-[11px] font-medium uppercase tracking-[0.14em] text-[#e2e8f0] transition-colors hover:bg-white/[0.04] hover:text-white cursor-pointer"
                   >
                     <span>Ver Detalles</span>
@@ -196,7 +212,7 @@ export function CollectionSection({
                   </button>
                   <button
                     type="button"
-                    onClick={() => onQuickAdd(watch)}
+                    onClick={() => onQuickAdd(watch, activeVariant)}
                     className="flex h-11 items-center justify-center px-3 text-[11px] font-medium uppercase tracking-[0.14em] text-white transition-colors hover:bg-white hover:text-[#0a0a0b] cursor-pointer"
                   >
                     + Añadir

@@ -1,7 +1,9 @@
-export interface WatchImageSlide {
+export interface WatchColorVariant {
+  id: string;
+  colorName: string;
+  productName: string;
+  swatchHex: string;
   src: string;
-  label: string;
-  macroZoom?: boolean;
 }
 
 export interface Timepiece {
@@ -15,8 +17,7 @@ export interface Timepiece {
     | 'Esfera Minimalista'
     | 'Buceo Técnico';
   priceCop: number;
-  image: string;
-  images: WatchImageSlide[];
+  variants: WatchColorVariant[];
   aspectRatio: '1:1' | '4:3';
   availability: 'Disponible' | 'Edición Numerada' | 'Bajo Pedido';
   editionNote: string;
@@ -34,25 +35,8 @@ export interface Timepiece {
 }
 
 export interface CartItem {
+  cartKey: string;
   watchId: string;
+  variantId: string;
   quantity: number;
-}
-
-export interface OrderReceipt {
-  orderNumber: string;
-  createdAt: string;
-  clientName: string;
-  clientEmail: string;
-  clientPhone: string;
-  deliveryMethod: 'nacional' | 'barranquilla';
-  destination: string;
-  items: Array<{
-    reference: string;
-    name: string;
-    quantity: number;
-    unitPriceCop: number;
-  }>;
-  subtotalCop: number;
-  shippingCop: number;
-  totalCop: number;
 }

@@ -53,8 +53,16 @@ export function ConciergeFooter({ whatsappNumber }: ConciergeFooterProps) {
 
         {/* Pie de página */}
         <div className="mt-14 flex flex-col justify-between gap-4 border-t border-white/[0.08] pt-8 text-[12px] font-light text-[#94a3b8] sm:flex-row sm:items-center">
-          <div className="flex items-center gap-4">
-            <span className="font-medium tracking-[0.18em] text-white uppercase">
+          <div className="flex items-center gap-3.5">
+            <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full">
+              <img
+                src="/assets/aistudio/logobarrtime_194bfff8.jpeg"
+                alt="Emblema Barrtime"
+                referrerPolicy="no-referrer"
+                className="pointer-events-none absolute left-1/2 top-[-26.6%] h-[210%] w-[210%] max-w-none -translate-x-1/2 object-contain mix-blend-lighten brightness-[0.9] contrast-[1.35]"
+              />
+            </span>
+            <span className="font-medium tracking-[0.2em] text-white uppercase">
               BARRTIME
             </span>
             <span aria-hidden="true">·</span>

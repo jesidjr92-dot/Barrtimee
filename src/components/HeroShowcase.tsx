@@ -1,13 +1,13 @@
 import { ArrowRight, Eye } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { formatCop } from '../data/horologyData';
-import { Timepiece } from '../types/horology';
+import { Timepiece, WatchColorVariant } from '../types/horology';
 import { WatchImageChamber } from './WatchImageChamber';
 
 interface HeroShowcaseProps {
   flagship: Timepiece;
-  onInspectFlagship: (watch: Timepiece) => void;
-  onQuickAddFlagship: (watch: Timepiece) => void;
+  onInspectFlagship: (watch: Timepiece, variantIndex: number) => void;
+  onQuickAddFlagship: (watch: Timepiece, variant: WatchColorVariant) => void;
 }
 
 export function HeroShowcase({
@@ -15,6 +15,7 @@ export function HeroShowcase({
   onInspectFlagship,
   onQuickAddFlagship,
 }: HeroShowcaseProps) {
+  const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
   const [colombiaTime, setColombiaTime] = useState<string>(() =>
     new Intl.DateTimeFormat('es-CO', {
       timeZone: 'America/Bogota',
@@ -40,6 +41,9 @@ export function HeroShowcase({
     return () => window.clearInterval(interval);
   }, []);
 
+  const activeVariant =
+    flagship.variants[selectedVariantIdx] ?? flagship.variants[0];
+
   return (
     <section id="inicio" className="border-b border-white/[0.08] bg-[#0a0a0b]">
       <div className="mx-auto max-w-[1440px] px-5 pt-10 pb-12 md:px-10 md:pt-16 md:pb-16 lg:px-16">
@@ -59,7 +63,7 @@ export function HeroShowcase({
                 className="mt-6 max-w-xl text-[36px] font-light leading-[1.16] tracking-[-0.03em] text-white md:text-[52px] md:leading-[1.12]"
                 style={{ textWrap: 'balance' }}
               >
-                Precisión arquitectónica en titanio y silencio mecánico.
+                {activeVariant.productName}
               </h1>
 
               <p className="mt-6 max-w-[54ch] text-[15px] font-light leading-[1.7] tracking-[0.01em] text-[#c4c7c8] md:text-[16px]">
@@ -67,7 +71,7 @@ export function HeroShowcase({
               </p>
             </div>
 
-            <div className="mt-10">
+            <div className="mt-8">
               {/* Especificaciones clave */}
               <div className="mb-8 grid grid-cols-3 gap-4 border-y border-white/[0.08] py-4">
                 <div>
@@ -108,7 +112,9 @@ export function HeroShowcase({
 
                 <button
                   type="button"
-                  onClick={() => onInspectFlagship(flagship)}
+                  onClick={() =>
+                    onInspectFlagship(flagship, selectedVariantIdx)
+                  }
                   className="inline-flex h-11 items-center gap-2.5 rounded-[4px] border border-white/[0.15] bg-transparent px-5 text-[11px] font-medium uppercase tracking-[0.15em] text-[#e2e8f0] whitespace-nowrap shrink-0 transition-colors duration-150 hover:border-white/40 hover:bg-white/[0.04] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#e2e8f0] cursor-pointer"
                 >
                   <Eye className="h-3.5 w-3.5" aria-hidden="true" />
@@ -123,12 +129,15 @@ export function HeroShowcase({
             <div className="specular-card flex h-full flex-col overflow-hidden rounded-[4px]">
               <div className="relative flex-1 overflow-hidden">
                 <WatchImageChamber
-                  src={flagship.image}
-                  images={flagship.images}
-                  alt={flagship.name}
+                  variants={flagship.variants}
+                  selectedIndex={selectedVariantIdx}
+                  onSelectIndex={setSelectedVariantIdx}
+                  alt={activeVariant.productName}
                   reference={flagship.reference}
                   aspectClass="aspect-[4/3] lg:h-full lg:aspect-auto"
-                  onImageClick={() => onInspectFlagship(flagship)}
+                  onImageClick={() =>
+                    onInspectFlagship(flagship, selectedVariantIdx)
+                  }
                 />
               </div>
 
@@ -139,12 +148,14 @@ export function HeroShowcase({
                       {flagship.collection} · {flagship.editionNote}
                     </p>
                     <p className="mt-1 text-[17px] font-normal tracking-[-0.01em] text-white">
-                      {flagship.name}
+                      {activeVariant.productName}
                     </p>
                   </div>
                   <button
                     type="button"
-                    onClick={() => onInspectFlagship(flagship)}
+                    onClick={() =>
+                      onInspectFlagship(flagship, selectedVariantIdx)
+                    }
                     className="rounded-[4px] border border-white/[0.14] px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.16em] text-[#e2e8f0] hover:border-white/40 hover:text-white cursor-pointer"
                   >
                     Inspeccionar
@@ -161,7 +172,9 @@ export function HeroShowcase({
                   </div>
                   <button
                     type="button"
-                    onClick={() => onQuickAddFlagship(flagship)}
+                    onClick={() =>
+                      onQuickAddFlagship(flagship, activeVariant)
+                    }
                     className="text-[11px] font-medium uppercase tracking-[0.15em] text-white whitespace-nowrap shrink-0 transition-colors hover:text-[#e2e8f0] cursor-pointer"
                   >
                     + Añadir a Bolsa
