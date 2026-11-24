@@ -62,6 +62,10 @@ export const TIMEPIECES: Timepiece[] = [
         label: 'Detalle esfera',
         macroZoom: true,
       },
+      {
+        src: '/src/assets/images/technoplata.jpeg',
+        label: 'Vista frontal',
+      },
     ],
     aspectRatio: '1:1',
     availability: 'Disponible',
