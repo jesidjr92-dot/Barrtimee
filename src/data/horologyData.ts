@@ -7,19 +7,19 @@ export const TIMEPIECES: Timepiece[] = [
     collection: 'Cronómetro Negro',
     name: 'Cronómetro Negro Titanio',
     category: 'Cronógrafos',
-    priceCop: 78500,
-    image: '/src/assets/images/hero_horology_flagship_1795474645218.jpg',
+    priceCop: 84900,
+    image: '/src/assets/images/casioplata.jpeg',
     images: [
       {
-        src: '/src/assets/images/hero_horology_flagship_1795474645218.jpg',
+        src: '/src/assets/images/casioplata.jpeg',
         label: 'Vista principal',
       },
       {
-        src: '/src/assets/images/watch_bt01_angle_1795496666186.jpg',
+        src: '/src/assets/images/casiorosa.jpeg',
         label: 'Perfil y pulsadores',
       },
       {
-        src: '/src/assets/images/hero_horology_flagship_1795474645218.jpg',
+        src: '/src/assets/images/casiocaranegra.jpeg',
         label: 'Detalle esfera',
         macroZoom: true,
       },
@@ -46,7 +46,7 @@ export const TIMEPIECES: Timepiece[] = [
     collection: 'Línea Arquitectura',
     name: 'Cronógrafo Acero 904L',
     category: 'Cronógrafos',
-    priceCop: 63900,
+    priceCop: 99900,
     image: '/src/assets/images/technoplata.jpeg',
     images: [
       {
@@ -88,19 +88,24 @@ export const TIMEPIECES: Timepiece[] = [
     collection: 'Alta Complicación',
     name: 'Torbellino Esqueleto G5',
     category: 'Grandes Complicaciones',
-    priceCop: 79800,
-    image: '/src/assets/images/watch_tourbillon_titanium_1795474646347.jpg',
+    priceCop: 89900,
+    image: '/src/assets/images/qyqplata.jpeg',
     images: [
       {
-        src: '/src/assets/images/watch_tourbillon_titanium_1795474646347.jpg',
+        src: '/src/assets/images/qyqplata.jpeg',
         label: 'Vista frontal',
       },
       {
-        src: '/src/assets/images/watch_bt03_angle_1795496667384.jpg',
+        src: '/src/assets/images/qyqoro.jpeg',
         label: 'Perfil 45°',
       },
       {
-        src: '/src/assets/images/watch_tourbillon_titanium_1795474646347.jpg',
+        src: '/src/assets/images/qyqoroplata.jpeg',
+        label: 'Detalle mecanismo',
+        macroZoom: true,
+      },
+       {
+        src: '/src/assets/images/qyqrosa.jpeg',
         label: 'Detalle mecanismo',
         macroZoom: true,
       },
@@ -126,19 +131,21 @@ export const TIMEPIECES: Timepiece[] = [
     collection: 'Soberana',
     name: 'Extrafino Platino 950',
     category: 'Esfera Minimalista',
-    priceCop: 96400,
-    image: '/src/assets/images/watch_minimal_dress_1795474646681.jpg',
+    priceCop: 89900,
+    image: '/src/assets/images/tissotcarablanca.jpeg',
     images: [
       {
-        src: '/src/assets/images/watch_minimal_dress_1795474646681.jpg',
+        src: '/src/assets/images/tissotcarablanca.jpeg',
         label: 'Vista frontal',
       },
       {
-        src: '/src/assets/images/watch_bt04_angle_1795496667448.jpg',
+        src: '/src/assets/images/tissotplata.jpeg
+',
         label: 'Perfil extrafino',
       },
       {
-        src: '/src/assets/images/watch_minimal_dress_1795474646681.jpg',
+        src: '/src/assets/images/tissotverde.jpeg
+',
         label: 'Detalle esfera',
         macroZoom: true,
       },
@@ -164,19 +171,24 @@ export const TIMEPIECES: Timepiece[] = [
     collection: 'Horizontes Profundos',
     name: 'Abismo Carbono Forjado 300M',
     category: 'Buceo Técnico',
-    priceCop: 69200,
-    image: '/src/assets/images/watch_diver_ceramic_1795474647523.jpg',
+    priceCop: 89900,
+    image: '/src/assets/images/hublotcarablanca.jpeg
+',
     images: [
       {
-        src: '/src/assets/images/watch_diver_ceramic_1795474647523.jpg',
+        src: '/src/assets/images/hublotcarablanca.jpeg
+',
         label: 'Vista frontal',
       },
       {
-        src: '/src/assets/images/watch_bt05_angle_1795496667654.jpg',
+        src: '/src/assets/images/hublotcarareazul.jpeg
+
+',
         label: 'Perfil bisel y corona',
       },
       {
-        src: '/src/assets/images/watch_diver_ceramic_1795474647523.jpg',
+        src: '/src/assets/images/hublotcaraverde.jpeg
+',
         label: 'Detalle esfera',
         macroZoom: true,
       },
@@ -194,6 +206,144 @@ export const TIMEPIECES: Timepiece[] = [
       caseMaterial: 'Carbono Forjado y Titanio G5',
       crystal: 'Zafiro 3.2 mm biselado',
       waterResistance: '300 m / 30 bar',
+    },
+  },
+  {
+    id: 'bt-06',
+    reference: 'REF. BT-02.ST',
+    collection: 'Línea Arquitectura',
+    name: 'Cronógrafo Acero 904L',
+    category: 'Cronógrafos',
+    priceCop: 79900,
+    image: '/src/assets/casiomcarablanca.jpeg
+',
+    images: [
+      {
+        src: '/src/assets/images/casiomcarablanca.jpeg
+',
+        label: 'Vista frontal',
+      },
+      {
+        src: '/src/assets/images/casiomcaraazul.jpeg
+',
+        label: 'Perfil 45°',
+      },
+      {
+        src: '/src/assets/images/casiomcaraverde.jpeg
+',
+        label: 'Detalle esfera',
+        macroZoom: true,
+      },
+      {
+        src: '/src/assets/images/casiomoro.jpeg
+',
+        label: 'Vista frontal',
+      },
+    ],
+    aspectRatio: '1:1',
+    availability: 'Disponible',
+    editionNote: 'Entrega asegurada en 24 a 48 h',
+    description:
+      'Cronógrafo en acero inoxidable 904L cepillado con esfera negro obsidiana mate y subesferas grabadas que garantizan lectura nítida bajo cualquier condición de luz.',
+    specs: {
+      diameter: '40.5 mm',
+      thickness: '11.8 mm',
+      movement: 'Automático',
+      powerReserve: '68 h',
+      caseMaterial: 'Acero Inoxidable 904L Cepillado',
+      crystal: 'Zafiro plano doble antirreflejos',
+      waterResistance: '100 m / 10 bar',
+    },
+  },
+   {
+    id: 'bt-07',
+    reference: 'REF. BT-02.ST',
+    collection: 'Línea Arquitectura',
+    name: 'Cronógrafo Acero 904L',
+    category: 'Cronógrafos',
+    priceCop: 89900,
+    image: '/src/assets/invictaplata.jpeg
+
+',
+    images: [
+      {
+        src: '/src/assets/images/invictaplata.jpeg
+
+',
+        label: 'Vista frontal',
+      },
+      {
+        src: '/src/assets/images/invictacaraverde.jpeg
+
+',
+        label: 'Perfil 45°',
+      },
+      {
+        src: '/src/assets/images/invictaoroplata.jpeg
+
+',
+        label: 'Detalle esfera',
+        macroZoom: true,
+      },
+      {
+        src: '/src/assets/images/invictaoro.jpeg
+
+',
+        label: 'Vista frontal',
+      },
+    ],
+    aspectRatio: '1:1',
+    availability: 'Disponible',
+    editionNote: 'Entrega asegurada en 24 a 48 h',
+    description:
+      'Cronógrafo en acero inoxidable 904L cepillado con esfera negro obsidiana mate y subesferas grabadas que garantizan lectura nítida bajo cualquier condición de luz.',
+    specs: {
+      diameter: '40.5 mm',
+      thickness: '11.8 mm',
+      movement: 'Automático',
+      powerReserve: '68 h',
+      caseMaterial: 'Acero Inoxidable 904L Cepillado',
+      crystal: 'Zafiro plano doble antirreflejos',
+      waterResistance: '100 m / 10 bar',
+    },
+  },
+  {
+    id: 'bt-08',
+    reference: 'REF. BT-02.ST',
+    collection: 'Línea Arquitectura',
+    name: 'Cronógrafo Acero 904L',
+    category: 'Cronógrafos',
+    priceCop: 84900,
+    image: '/src/assets/casiocplata.jpeg
+
+
+',
+    images: [
+      {
+        src: '/src/assets/images/casiocplata.jpeg
+
+
+',
+        label: 'Vista frontal',
+      },
+      {
+        src: '/src/assets/images/casiocoro.jpeg
+
+      },
+    ],
+    aspectRatio: '1:1',
+    availability: 'Disponible',
+    editionNote: 'Entrega asegurada en 24 a 48 h',
+    description:
+      'Cronógrafo en acero inoxidable 904L cepillado con esfera negro obsidiana mate y subesferas grabadas que garantizan lectura nítida bajo cualquier condición de luz.',
+    specs: {
+      diameter: '40.5 mm',
+      thickness: '11.8 mm',
+      movement: 'Automático',
+      powerReserve: '68 h',
+      caseMaterial: 'Acero Inoxidable 904L Cepillado',
+      crystal: 'Zafiro plano doble antirreflejos',
+      waterResistance: '100 m / 10 bar',
     },
   },
 ];
