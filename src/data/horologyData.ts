@@ -8,7 +8,7 @@ export const TIMEPIECES: Timepiece[] = [
     name: 'Cronómetro Negro Titanio',
     category: 'Cronógrafos',
     priceCop: 78500000,
-    image: '/src/assets/images/hero_horology_flagship_1795474645218.jpg',
+    image: '/src/assets/images/tissotpdxclassic.jpeg',
     aspectRatio: '4:3',
     availability: 'Edición Numerada',
     editionNote: 'Disponibilidad inmediata en Barranquilla',
