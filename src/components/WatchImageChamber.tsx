@@ -116,7 +116,7 @@ export function WatchImageChamber({
           return (
             <div
               key={`${variant.id}-${idx}`}
-              className="relative flex h-full w-full shrink-0 items-center justify-center overflow-hidden bg-[#121214] p-6"
+              className="relative flex h-full w-full shrink-0 items-center justify-center overflow-hidden bg-[#121214]"
             >
               {!isFailed ? (
                 <img
@@ -128,7 +128,7 @@ export function WatchImageChamber({
                   onError={() =>
                     setFailedSlides((prev) => ({ ...prev, [idx]: true }))
                   }
-                  className={`h-[72%] w-[72%] object-contain transition-all duration-300 ease-out ${
+                  className={`h-full w-full scale-[0.72] object-cover transition-all duration-300 ease-out ${
                     lumeMode
                       ? 'brightness-[0.65] contrast-[1.35] saturate-[0.85]'
                       : 'brightness-100 contrast-100'
