@@ -3,7 +3,7 @@ import { Timepiece } from '../types/horology';
 export const TIMEPIECES: Timepiece[] = [
   {
    
-    image: '/src/assets/images/logobarrtime',
+    image: '/src/assets/images/logobarrtime.jpeg',
     
     },
   },
