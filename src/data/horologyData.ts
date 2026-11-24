@@ -7,7 +7,7 @@ export const TIMEPIECES: Timepiece[] = [
     collection: 'Cronómetro Negro',
     name: 'Cronómetro Negro Titanio',
     category: 'Cronógrafos',
-    priceCop: 7850000,
+    priceCop: 78500,
     image: '/src/assets/images/hero_horology_flagship_1795474645218.jpg',
     images: [
       {
@@ -46,7 +46,7 @@ export const TIMEPIECES: Timepiece[] = [
     collection: 'Línea Arquitectura',
     name: 'Cronógrafo Acero 904L',
     category: 'Cronógrafos',
-    priceCop: 6390000,
+    priceCop: 63900,
     image: '/src/assets/images/watch_chronograph_steel_1795474645685.jpg',
     images: [
       {
@@ -84,7 +84,7 @@ export const TIMEPIECES: Timepiece[] = [
     collection: 'Alta Complicación',
     name: 'Torbellino Esqueleto G5',
     category: 'Grandes Complicaciones',
-    priceCop: 19800000,
+    priceCop: 79800,
     image: '/src/assets/images/watch_tourbillon_titanium_1795474646347.jpg',
     images: [
       {
@@ -122,7 +122,7 @@ export const TIMEPIECES: Timepiece[] = [
     collection: 'Soberana',
     name: 'Extrafino Platino 950',
     category: 'Esfera Minimalista',
-    priceCop: 9640000,
+    priceCop: 96400,
     image: '/src/assets/images/watch_minimal_dress_1795474646681.jpg',
     images: [
       {
@@ -160,7 +160,7 @@ export const TIMEPIECES: Timepiece[] = [
     collection: 'Horizontes Profundos',
     name: 'Abismo Carbono Forjado 300M',
     category: 'Buceo Técnico',
-    priceCop: 6920000,
+    priceCop: 69200,
     image: '/src/assets/images/watch_diver_ceramic_1795474647523.jpg',
     images: [
       {
