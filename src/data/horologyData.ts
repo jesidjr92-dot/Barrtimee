@@ -139,13 +139,11 @@ export const TIMEPIECES: Timepiece[] = [
         label: 'Vista frontal',
       },
       {
-        src: '/src/assets/images/tissotplata.jpeg
-',
+        src: '/src/assets/images/tissotplata.jpeg',
         label: 'Perfil extrafino',
       },
       {
-        src: '/src/assets/images/tissotverde.jpeg
-',
+        src: '/src/assets/images/tissotverde.jpeg',
         label: 'Detalle esfera',
         macroZoom: true,
       },
@@ -172,23 +170,18 @@ export const TIMEPIECES: Timepiece[] = [
     name: 'Abismo Carbono Forjado 300M',
     category: 'Buceo Técnico',
     priceCop: 89900,
-    image: '/src/assets/images/hublotcarablanca.jpeg
-',
+    image: '/src/assets/images/hublotcarablanca.jpeg',
     images: [
       {
-        src: '/src/assets/images/hublotcarablanca.jpeg
-',
+        src: '/src/assets/images/hublotcarablanca.jpeg',
         label: 'Vista frontal',
       },
       {
-        src: '/src/assets/images/hublotcarareazul.jpeg
-
-',
+        src: '/src/assets/images/hublotcarareazul.jpeg',
         label: 'Perfil bisel y corona',
       },
       {
-        src: '/src/assets/images/hublotcaraverde.jpeg
-',
+        src: '/src/assets/images/hublotcaraverde.jpeg',
         label: 'Detalle esfera',
         macroZoom: true,
       },
@@ -215,28 +208,23 @@ export const TIMEPIECES: Timepiece[] = [
     name: 'Cronógrafo Acero 904L',
     category: 'Cronógrafos',
     priceCop: 79900,
-    image: '/src/assets/casiomcarablanca.jpeg
-',
+    image: '/src/assets/casiomcarablanca.jpeg',
     images: [
       {
-        src: '/src/assets/images/casiomcarablanca.jpeg
-',
+        src: '/src/assets/images/casiomcarablanca.jpeg',
         label: 'Vista frontal',
       },
       {
-        src: '/src/assets/images/casiomcaraazul.jpeg
-',
+        src: '/src/assets/images/casiomcaraazul.jpeg',
         label: 'Perfil 45°',
       },
       {
-        src: '/src/assets/images/casiomcaraverde.jpeg
-',
+        src: '/src/assets/images/casiomcaraverde.jpeg',
         label: 'Detalle esfera',
         macroZoom: true,
       },
       {
-        src: '/src/assets/images/casiomoro.jpeg
-',
+        src: '/src/assets/images/casiomoro.jpeg',
         label: 'Vista frontal',
       },
     ],
@@ -262,33 +250,23 @@ export const TIMEPIECES: Timepiece[] = [
     name: 'Cronógrafo Acero 904L',
     category: 'Cronógrafos',
     priceCop: 89900,
-    image: '/src/assets/invictaplata.jpeg
-
-',
+    image: '/src/assets/invictaplata.jpeg',
     images: [
       {
-        src: '/src/assets/images/invictaplata.jpeg
-
-',
+        src: '/src/assets/images/invictaplata.jpeg',
         label: 'Vista frontal',
       },
       {
-        src: '/src/assets/images/invictacaraverde.jpeg
-
-',
+        src: '/src/assets/images/invictacaraverde.jpeg',
         label: 'Perfil 45°',
       },
       {
-        src: '/src/assets/images/invictaoroplata.jpeg
-
-',
+        src: '/src/assets/images/invictaoroplata.jpeg',
         label: 'Detalle esfera',
         macroZoom: true,
       },
       {
-        src: '/src/assets/images/invictaoro.jpeg
-
-',
+        src: '/src/assets/images/invictaoro.jpeg',
         label: 'Vista frontal',
       },
     ],
@@ -314,16 +292,10 @@ export const TIMEPIECES: Timepiece[] = [
     name: 'Cronógrafo Acero 904L',
     category: 'Cronógrafos',
     priceCop: 84900,
-    image: '/src/assets/casiocplata.jpeg
-
-
-',
+    image: '/src/assets/casiocplata.jpeg',
     images: [
       {
-        src: '/src/assets/images/casiocplata.jpeg
-
-
-',
+        src: '/src/assets/images/casiocplata.jpeg',
         label: 'Vista frontal',
       },
       {
