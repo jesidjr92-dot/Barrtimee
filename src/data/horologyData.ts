@@ -150,7 +150,7 @@ export const BARRANQUILLA_LOCATION = {
   detail: 'Atención presencial y asesoría personalizada en Barranquilla',
 };
 
-export const CONCIERGE_WHATSAPP_NUMBER = '573005550194';
+export const CONCIERGE_WHATSAPP_NUMBER = '573046095806';
 
 export function formatCop(amount: number): string {
   return `${new Intl.NumberFormat('es-CO', {
