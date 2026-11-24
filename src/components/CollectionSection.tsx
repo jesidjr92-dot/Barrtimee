@@ -100,10 +100,11 @@ export function CollectionSection({
                       aria-label={`Ver especificaciones de ${watch.name}`}
                       className="block w-full overflow-hidden text-left focus-visible:outline-none cursor-pointer"
                     >
-                      <WatchImageChamber
-                        src={watch.image}
-                        alt={watch.name}
-                        reference={watch.reference}
+                     <WatchImageChamber
+  src={reloj.imagen}
+  images={reloj.imágenes}
+  alt={reloj.nombre}
+  referencia={reloj.referencia}
                         aspectClass="aspect-square"
                         className="transition-transform duration-300 ease-out group-hover:scale-[1.03]"
                       />
