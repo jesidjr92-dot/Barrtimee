@@ -115,12 +115,13 @@ export function AcquisitionDrawer({
       '',
       ...lines,
       '',
+      `Subtotal: ${formatCop(subtotal)}`,
       `Envío (${deliveryCity.trim() || 'Barranquilla'}): ${
         shippingCost === 0 ? 'Cortesía' : formatCop(shippingCost)
       }`,
       `Total a pagar: ${formatCop(total)}`,
     ].join('\n');
-  }, [resolvedItems, buyerName, deliveryCity, shippingCost, total]);
+  }, [resolvedItems, buyerName, deliveryCity, subtotal, shippingCost, total]);
 
   const whatsappCheckoutUrl = useMemo(
     () => buildWhatsAppUrl(whatsappMessage, whatsappNumber),
