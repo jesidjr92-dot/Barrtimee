@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 interface WatchImageChamberProps {
   src: string;
+  images?: string[];
   alt: string;
   reference: string;
   aspectClass?: string;
@@ -11,6 +12,7 @@ interface WatchImageChamberProps {
 
 export function WatchImageChamber({
   src,
+  images,
   alt,
   reference,
   aspectClass = 'aspect-square',
@@ -18,6 +20,20 @@ export function WatchImageChamber({
   className = '',
 }: WatchImageChamberProps) {
   const [hasError, setHasError] = useState(false);
+  const [index, setIndex] = useState(0);
+
+  const lista = images && images.length > 0 ? images : [src];
+  const actual = lista[index];
+
+  const anterior = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIndex(index === 0 ? lista.length - 1 : index - 1);
+  };
+
+  const siguiente = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIndex(index === lista.length - 1 ? 0 : index + 1);
+  };
 
   return (
     <div
@@ -25,7 +41,7 @@ export function WatchImageChamber({
     >
       {!hasError ? (
         <img
-          src={src}
+          src={actual}
           alt={alt}
           referrerPolicy="no-referrer"
           loading="lazy"
@@ -64,6 +80,22 @@ export function WatchImageChamber({
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(148,210,255,0.14),rgba(10,10,11,0.55)_70%)] mix-blend-screen"
         />
+      )}
+
+      {lista.length > 1 && !hasError && (
+        <>
+          <button onClick={anterior} className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 text-white w-8 h-8 rounded-full flex items-center justify-center z-10">
+            ‹
+          </button>
+          <button onClick={siguiente} className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 text-white w-8 h-8 rounded-full flex items-center justify-center z-10">
+            ›
+          </button>
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+            {lista.map((_, i) => (
+              <button key={i} onClick={(e) => { e.stopPropagation(); setIndex(i); }} className={`w-2 h-2 rounded-full ${i === index ? 'bg-white' : 'bg-white/50'}`} />
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
