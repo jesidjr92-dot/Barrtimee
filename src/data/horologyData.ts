@@ -104,7 +104,7 @@ export const TIMEPIECES: Timepiece[] = [
         label: 'Detalle mecanismo',
         macroZoom: true,
       },
-       {
+      {
         src: '/src/assets/images/qyqrosa.jpeg',
         label: 'Detalle mecanismo',
         macroZoom: true,
@@ -208,7 +208,7 @@ export const TIMEPIECES: Timepiece[] = [
     name: 'Cronógrafo Acero 904L',
     category: 'Cronógrafos',
     priceCop: 79900,
-    image: '/src/assets/casiomcarablanca.jpeg',
+    image: '/src/assets/images/casiomcarablanca.jpeg',
     images: [
       {
         src: '/src/assets/images/casiomcarablanca.jpeg',
@@ -243,14 +243,14 @@ export const TIMEPIECES: Timepiece[] = [
       waterResistance: '100 m / 10 bar',
     },
   },
-   {
+  {
     id: 'bt-07',
     reference: 'REF. BT-02.ST',
     collection: 'Línea Arquitectura',
     name: 'Cronógrafo Acero 904L',
     category: 'Cronógrafos',
     priceCop: 89900,
-    image: '/src/assets/invictaplata.jpeg',
+    image: '/src/assets/images/invictaplata.jpeg',
     images: [
       {
         src: '/src/assets/images/invictaplata.jpeg',
@@ -292,15 +292,16 @@ export const TIMEPIECES: Timepiece[] = [
     name: 'Cronógrafo Acero 904L',
     category: 'Cronógrafos',
     priceCop: 84900,
-    image: '/src/assets/casiocplata.jpeg',
+    image: '/src/assets/images/casiocplata.jpeg',
     images: [
       {
         src: '/src/assets/images/casiocplata.jpeg',
         label: 'Vista frontal',
       },
       {
-        src: '/src/assets/images/casiocoro.jpeg
-
+        src: '/src/assets/images/casiocoro.jpeg',
+        label: 'Detalle esfera',
+        macroZoom: true,
       },
     ],
     aspectRatio: '1:1',
@@ -345,6 +346,9 @@ export function buildWhatsAppUrl(
   message: string,
   phoneNumber: string = DEFAULT_WHATSAPP_NUMBER
 ): string {
+  const clean = sanitizePhoneNumber(phoneNumber);
+  return `https://wa.me/${clean}?text=${encodeURIComponent(message)}`;
+}
   const cleanNumber = sanitizePhoneNumber(phoneNumber) || DEFAULT_WHATSAPP_NUMBER;
   return `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
 }
