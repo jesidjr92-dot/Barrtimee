@@ -34,7 +34,11 @@ export const TIMEPIECES: Timepiece[] = [
     name: 'Cronógrafo Acero 904L',
     category: 'Cronógrafos',
     priceCop: 63900000,
-    image: '/src/assets/images/watch_chronograph_steel_1795474645685.jpg',
+    images: [
+  '/src/assets/images/watch_chronograph_steel_1795474645685.jpg',
+  '/src/assets/images/Ntissotpdxclassic.jpeg',
+  '/src/assets/images/logobarrtime.jpeg',
+],,
     aspectRatio: '1:1',
     availability: 'Disponible',
     editionNote: 'Entrega asegurada en 24 a 48 h',
