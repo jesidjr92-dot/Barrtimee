@@ -10,6 +10,7 @@ export interface Timepiece {
     | 'Buceo Técnico';
   priceCop: number;
   image: string;
+  images?: string[];
   aspectRatio: '1:1' | '4:3';
   availability: 'Disponible' | 'Edición Numerada' | 'Bajo Pedido';
   editionNote: string;
