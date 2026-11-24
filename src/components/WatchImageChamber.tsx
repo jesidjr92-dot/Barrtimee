@@ -123,8 +123,8 @@ export function WatchImageChamber({
                   onError={() =>
                     setFailedSlides((prev) => ({ ...prev, [idx]: true }))
                   }
-                  className={`h-full w-full object-cover transition-all duration-300 ease-out ${
-                    slide.macroZoom ? 'scale-[1.45]' : 'scale-100'
+                  className={`h-full w-full object-cover object-center transition-all duration-300 ease-out ${
+                    slide.macroZoom ? 'scale-[1.55]' : 'scale-[1.18]'
                   } ${
                     lumeMode
                       ? 'brightness-[0.65] contrast-[1.35] saturate-[0.85]'
