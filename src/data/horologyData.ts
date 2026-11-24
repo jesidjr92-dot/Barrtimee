@@ -50,7 +50,7 @@ export const TIMEPIECES: Timepiece[] = [
     image: '/src/assets/images/technoplata.jpeg',
     images: [
       {
-        src: '/src/assets/images/technonegro.jpeg',
+        src: '/src/assets/images/technoplata.jpeg',
         label: 'Vista frontal',
       },
       {
@@ -63,7 +63,7 @@ export const TIMEPIECES: Timepiece[] = [
         macroZoom: true,
       },
       {
-        src: '/src/assets/images/technoplata.jpeg',
+        src: '/src/assets/images/technonegro.jpeg',
         label: 'Vista frontal',
       },
     ],
