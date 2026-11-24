@@ -110,18 +110,8 @@ export function AcquisitionDrawer({
       ? `Hola Barrtime, soy ${buyerName.trim()} y quiero finalizar mi compra:`
       : 'Hola Barrtime, quiero finalizar mi compra con los siguientes relojes:';
 
-    return [
-      header,
-      '',
-      ...lines,
-      '',
-      `Subtotal: ${formatCop(subtotal)}`,
-      `Envío (${deliveryCity.trim() || 'Barranquilla'}): ${
-        shippingCost === 0 ? 'Cortesía' : formatCop(shippingCost)
-      }`,
-      `Total a pagar: ${formatCop(total)}`,
-    ].join('\n');
-  }, [resolvedItems, buyerName, deliveryCity, subtotal, shippingCost, total]);
+    return [header, '', ...lines, '', `Total a pagar: ${formatCop(total)}`].join('\n');
+  }, [resolvedItems, buyerName, total]);
 
   const whatsappCheckoutUrl = useMemo(
     () => buildWhatsAppUrl(whatsappMessage, whatsappNumber),
@@ -427,6 +417,9 @@ export function AcquisitionDrawer({
           </div>
         )}
       </aside>
+    </div>
+  );
+}
     </div>
   );
 }
