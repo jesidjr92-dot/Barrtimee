@@ -111,7 +111,7 @@ export const TIMEPIECES: Timepiece[] = [
       },
     ],
     aspectRatio: '1:1',
-    availability: 'Bajo Pedido',
+    availability: 'Disponible',
     editionNote: 'Pieza de colección bajo asignación',
     description:
       'Arquitectura abierta con regulador giratorio suspendido a las 6 horas entre puentes de titanio microarenados con acabado oscuro y detalles biselados a mano.',
