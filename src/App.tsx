@@ -5,8 +5,10 @@ import { AcquisitionDrawer } from './components/AcquisitionDrawer';
 import { CollectionSection } from './components/CollectionSection';
 import { CompareModal } from './components/CompareModal';
 import { ConciergeFooter } from './components/ConciergeFooter';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { HeroShowcase } from './components/HeroShowcase';
 import { Navbar } from './components/Navbar';
+import { ReviewsSection } from './components/ReviewsSection';
 import { TimepieceDetailModal } from './components/TimepieceDetailModal';
 import {
   DEFAULT_WHATSAPP_NUMBER,
@@ -144,6 +146,7 @@ export default function App() {
   };
 
   return (
+    <ErrorBoundary>
     <MotionConfig reducedMotion="user">
     <div className="min-h-screen bg-[#0a0a0b] text-[#e5e2e3]">
       <Navbar cartCount={totalBagCount} onOpenBag={() => setIsBagOpen(true)} />
@@ -181,6 +184,8 @@ export default function App() {
           onInspectWatch={handleInspectWatch}
           onQuickAdd={handleAddToBag}
         />
+
+        <ReviewsSection />
       </main>
 
       <ConciergeFooter whatsappNumber={whatsappNumber} />
@@ -245,5 +250,6 @@ export default function App() {
       )}
     </div>
     </MotionConfig>
+    </ErrorBoundary>
   );
 }

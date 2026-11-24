@@ -1,0 +1,58 @@
+{
+  "entities": {
+    "Review": {
+      "title": "Review",
+      "description": "Public customer review and rating submitted by a storefront visitor for Barrtime watches.",
+      "type": "object",
+      "properties": {
+        "authorName": {
+          "type": "string",
+          "description": "Display name of the visitor submitting the review.",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "watchName": {
+          "type": "string",
+          "description": "Selected timepiece name or general store experience label.",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "rating": {
+          "type": "integer",
+          "description": "Star rating from 1 to 5."
+        },
+        "comment": {
+          "type": "string",
+          "description": "Written review or comment text.",
+          "minLength": 3,
+          "maxLength": 600
+        },
+        "isPublic": {
+          "type": "boolean",
+          "description": "Visibility flag required for public storefront display."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the review was created."
+        }
+      },
+      "required": [
+        "authorName",
+        "watchName",
+        "rating",
+        "comment",
+        "isPublic",
+        "createdAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/reviews/{reviewId}": {
+      "schema": {
+        "$ref": "#/entities/Review"
+      },
+      "description": "Publicly readable and visitor-submittable reviews for Barrtime watches."
+    }
+  }
+}

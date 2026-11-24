@@ -9,6 +9,7 @@ interface NavbarProps {
 const NAV_LINKS = [
   { label: 'Inicio', href: '#inicio' },
   { label: 'Colección', href: '#coleccion' },
+  { label: 'Reseñas', href: '#resenas' },
   { label: 'Asesoría', href: '#atencion' },
 ];
 
