@@ -1,3 +1,9 @@
+export interface WatchImageSlide {
+  src: string;
+  label: string;
+  macroZoom?: boolean;
+}
+
 export interface Timepiece {
   id: string;
   reference: string;
@@ -10,7 +16,7 @@ export interface Timepiece {
     | 'Buceo Técnico';
   priceCop: number;
   image: string;
-  images?: string[];
+  images: WatchImageSlide[];
   aspectRatio: '1:1' | '4:3';
   availability: 'Disponible' | 'Edición Numerada' | 'Bajo Pedido';
   editionNote: string;

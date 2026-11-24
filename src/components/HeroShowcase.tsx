@@ -68,7 +68,7 @@ export function HeroShowcase({
             </div>
 
             <div className="mt-10">
-              {/* Especificaciones clave de la pieza principal */}
+              {/* Especificaciones clave */}
               <div className="mb-8 grid grid-cols-3 gap-4 border-y border-white/[0.08] py-4">
                 <div>
                   <span className="block text-[10px] font-medium uppercase tracking-[0.18em] text-[#94a3b8]">
@@ -118,56 +118,55 @@ export function HeroShowcase({
             </div>
           </div>
 
-          {/* Columna de imagen principal */}
+          {/* Columna de galería deslizable principal */}
           <div className="flex flex-col lg:col-span-6">
-            <div className="specular-card group flex h-full flex-col overflow-hidden rounded-[4px]">
-              <button
-                type="button"
-                onClick={() => onInspectFlagship(flagship)}
-                aria-label={`Inspeccionar ${flagship.name}`}
-                className="relative block flex-1 overflow-hidden text-left focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white cursor-pointer"
-              >
+            <div className="specular-card flex h-full flex-col overflow-hidden rounded-[4px]">
+              <div className="relative flex-1 overflow-hidden">
                 <WatchImageChamber
                   src={flagship.image}
+                  images={flagship.images}
                   alt={flagship.name}
                   reference={flagship.reference}
                   aspectClass="aspect-[4/3] lg:h-full lg:aspect-auto"
-                  className="transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                  onImageClick={() => onInspectFlagship(flagship)}
                 />
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a0a0b]/85 via-transparent to-transparent"
-                />
-                <div className="absolute right-4 bottom-4 left-4 flex items-end justify-between gap-4">
+              </div>
+
+              <div className="border-t border-white/[0.08] bg-[#121214] px-5 py-4">
+                <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#94a3b8]">
+                    <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[#94a3b8]">
                       {flagship.collection} · {flagship.editionNote}
                     </p>
-                    <p className="mt-1 text-[18px] font-normal tracking-[-0.01em] text-white">
+                    <p className="mt-1 text-[17px] font-normal tracking-[-0.01em] text-white">
                       {flagship.name}
                     </p>
                   </div>
-                  <span className="hidden sm:inline-flex items-center gap-1.5 rounded-[2px] border border-white/[0.14] bg-[#0a0a0b]/80 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.16em] text-[#e2e8f0] whitespace-nowrap shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => onInspectFlagship(flagship)}
+                    className="rounded-[4px] border border-white/[0.14] px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.16em] text-[#e2e8f0] hover:border-white/40 hover:text-white cursor-pointer"
+                  >
                     Inspeccionar
-                  </span>
+                  </button>
                 </div>
-              </button>
 
-              <div className="flex items-center justify-between border-t border-white/[0.08] bg-[#121214] px-5 py-3.5">
-                <div className="flex items-center gap-3 text-[12px] text-[#94a3b8] tabular-nums">
-                  <span>{flagship.specs.diameter}</span>
-                  <span aria-hidden="true">/</span>
-                  <span>{flagship.specs.waterResistance}</span>
-                  <span aria-hidden="true">/</span>
-                  <span>{flagship.specs.powerReserve}</span>
+                <div className="mt-3 flex items-center justify-between border-t border-white/[0.06] pt-3">
+                  <div className="flex items-center gap-3 text-[12px] text-[#94a3b8] tabular-nums">
+                    <span>{flagship.specs.diameter}</span>
+                    <span aria-hidden="true">/</span>
+                    <span>{flagship.specs.waterResistance}</span>
+                    <span aria-hidden="true">/</span>
+                    <span>{flagship.specs.powerReserve}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => onQuickAddFlagship(flagship)}
+                    className="text-[11px] font-medium uppercase tracking-[0.15em] text-white whitespace-nowrap shrink-0 transition-colors hover:text-[#e2e8f0] cursor-pointer"
+                  >
+                    + Añadir a Bolsa
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => onQuickAddFlagship(flagship)}
-                  className="text-[11px] font-medium uppercase tracking-[0.15em] text-white whitespace-nowrap shrink-0 transition-colors hover:text-[#e2e8f0] cursor-pointer"
-                >
-                  + Añadir a Bolsa
-                </button>
               </div>
             </div>
           </div>

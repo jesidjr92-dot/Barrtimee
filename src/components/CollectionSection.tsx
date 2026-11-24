@@ -42,7 +42,7 @@ export function CollectionSection({
           </div>
 
           <p className="max-w-md text-[14px] font-light leading-[1.6] text-[#94a3b8]">
-            Relojes seleccionados con entrega asegurada en Barranquilla y toda Colombia. Selecciona hasta cuatro referencias para comparar.
+            Desliza sobre cada reloj para ver sus diferentes ángulos. Selecciona hasta cuatro referencias para compararlas.
           </p>
         </div>
 
@@ -94,21 +94,14 @@ export function CollectionSection({
               >
                 <div>
                   <div className="relative border-b border-white/[0.08]">
-                    <button
-                      type="button"
-                      onClick={() => onInspectWatch(watch)}
-                      aria-label={`Ver especificaciones de ${watch.name}`}
-                      className="block w-full overflow-hidden text-left focus-visible:outline-none cursor-pointer"
-                    >
-                     <WatchImageChamber
-  src={reloj.imagen}
-  images={reloj.imágenes}
-  alt={reloj.nombre}
-  referencia={reloj.referencia}
-                        aspectClass="aspect-square"
-                        className="transition-transform duration-300 ease-out group-hover:scale-[1.03]"
-                      />
-                    </button>
+                    <WatchImageChamber
+                      src={watch.image}
+                      images={watch.images}
+                      alt={watch.name}
+                      reference={watch.reference}
+                      aspectClass="aspect-square"
+                      onImageClick={() => onInspectWatch(watch)}
+                    />
 
                     <button
                       type="button"
@@ -119,7 +112,7 @@ export function CollectionSection({
                           ? 'Quitar de comparación'
                           : 'Añadir a comparación'
                       }
-                      className={`absolute top-3 right-3 flex h-7 w-7 items-center justify-center rounded-[4px] border transition-colors cursor-pointer ${
+                      className={`absolute top-3 right-3 z-20 flex h-7 w-7 items-center justify-center rounded-[4px] border transition-colors cursor-pointer ${
                         isCompared
                           ? 'border-white bg-white text-[#0a0a0b]'
                           : 'border-white/20 bg-[#0a0a0b]/75 text-transparent hover:border-white/50'

@@ -7,11 +7,11 @@ import { ConciergeFooter } from './components/ConciergeFooter';
 import { HeroShowcase } from './components/HeroShowcase';
 import { Navbar } from './components/Navbar';
 import { TimepieceDetailModal } from './components/TimepieceDetailModal';
-import { TIMEPIECES } from './data/horologyData';
-import { CartItem, OrderReceipt, Timepiece } from './types/horology';
+import { DEFAULT_WHATSAPP_NUMBER, TIMEPIECES } from './data/horologyData';
+import { CartItem, Timepiece } from './types/horology';
 
 const STORAGE_CART_KEY = 'barrtime_bag_cop_v1';
-const STORAGE_RECEIPT_KEY = 'barrtime_last_receipt_cop_v1';
+const STORAGE_WHATSAPP_KEY = 'barrtime_whatsapp_v1';
 
 export default function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
@@ -23,12 +23,12 @@ export default function App() {
     }
   });
 
-  const [lastReceipt, setLastReceipt] = useState<OrderReceipt | null>(() => {
+  const [whatsappNumber, setWhatsappNumber] = useState<string>(() => {
     try {
-      const raw = window.localStorage.getItem(STORAGE_RECEIPT_KEY);
-      return raw ? (JSON.parse(raw) as OrderReceipt) : null;
+      const saved = window.localStorage.getItem(STORAGE_WHATSAPP_KEY);
+      return saved || DEFAULT_WHATSAPP_NUMBER;
     } catch {
-      return null;
+      return DEFAULT_WHATSAPP_NUMBER;
     }
   });
 
@@ -48,18 +48,11 @@ export default function App() {
 
   useEffect(() => {
     try {
-      if (lastReceipt) {
-        window.localStorage.setItem(
-          STORAGE_RECEIPT_KEY,
-          JSON.stringify(lastReceipt)
-        );
-      } else {
-        window.localStorage.removeItem(STORAGE_RECEIPT_KEY);
-      }
+      window.localStorage.setItem(STORAGE_WHATSAPP_KEY, whatsappNumber);
     } catch {
       // ignorar errores de almacenamiento
     }
-  }, [lastReceipt]);
+  }, [whatsappNumber]);
 
   useEffect(() => {
     if (!toastMessage) return;
@@ -124,11 +117,6 @@ export default function App() {
     });
   };
 
-  const handleCompleteOrder = (receipt: OrderReceipt) => {
-    setLastReceipt(receipt);
-    setCartItems([]);
-  };
-
   return (
     <div className="min-h-screen bg-[#0a0a0b] text-[#e5e2e3]">
       <Navbar cartCount={totalBagCount} onOpenBag={() => setIsBagOpen(true)} />
@@ -151,10 +139,11 @@ export default function App() {
         />
       </main>
 
-      <ConciergeFooter />
+      <ConciergeFooter whatsappNumber={whatsappNumber} />
 
       <TimepieceDetailModal
         watch={inspectedWatch}
+        whatsappNumber={whatsappNumber}
         onClose={() => setInspectedWatch(null)}
         onAddToBag={handleAddToBag}
       />
@@ -172,12 +161,12 @@ export default function App() {
         isOpen={isBagOpen}
         items={cartItems}
         timepieces={TIMEPIECES}
-        lastReceipt={lastReceipt}
+        whatsappNumber={whatsappNumber}
+        onChangeWhatsAppNumber={setWhatsappNumber}
         onClose={() => setIsBagOpen(false)}
         onUpdateQuantity={handleUpdateQuantity}
         onRemoveItem={handleRemoveItem}
-        onCompleteOrder={handleCompleteOrder}
-        onClearReceipt={() => setLastReceipt(null)}
+        onClearBag={() => setCartItems([])}
       />
 
       {/* Notificación flotante */}

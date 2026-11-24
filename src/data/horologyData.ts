@@ -9,6 +9,21 @@ export const TIMEPIECES: Timepiece[] = [
     category: 'Cronógrafos',
     priceCop: 78500000,
     image: '/src/assets/images/hero_horology_flagship_1795474645218.jpg',
+    images: [
+      {
+        src: '/src/assets/images/hero_horology_flagship_1795474645218.jpg',
+        label: 'Vista principal',
+      },
+      {
+        src: '/src/assets/images/watch_bt01_angle_1795496666186.jpg',
+        label: 'Perfil y pulsadores',
+      },
+      {
+        src: '/src/assets/images/hero_horology_flagship_1795474645218.jpg',
+        label: 'Detalle esfera',
+        macroZoom: true,
+      },
+    ],
     aspectRatio: '4:3',
     availability: 'Edición Numerada',
     editionNote: 'Disponibilidad inmediata en Barranquilla',
@@ -23,8 +38,6 @@ export const TIMEPIECES: Timepiece[] = [
       caseMaterial: 'Titanio Grado 5 y Cerámica Negra',
       crystal: 'Zafiro abombado antirreflejos',
       waterResistance: '100 m / 10 bar',
-   
-    
     },
   },
   {
@@ -34,11 +47,22 @@ export const TIMEPIECES: Timepiece[] = [
     name: 'Cronógrafo Acero 904L',
     category: 'Cronógrafos',
     priceCop: 63900000,
+    image: '/src/assets/images/watch_chronograph_steel_1795474645685.jpg',
     images: [
-  '/src/assets/images/watch_chronograph_steel_1795474645685.jpg',
-  '/src/assets/images/Ntissotpdxclassic.jpeg',
-  '/src/assets/images/logobarrtime.jpeg',
-],,
+      {
+        src: '/src/assets/images/watch_chronograph_steel_1795474645685.jpg',
+        label: 'Vista frontal',
+      },
+      {
+        src: '/src/assets/images/watch_bt02_angle_1795496667737.jpg',
+        label: 'Perfil 45°',
+      },
+      {
+        src: '/src/assets/images/watch_chronograph_steel_1795474645685.jpg',
+        label: 'Detalle esfera',
+        macroZoom: true,
+      },
+    ],
     aspectRatio: '1:1',
     availability: 'Disponible',
     editionNote: 'Entrega asegurada en 24 a 48 h',
@@ -62,6 +86,21 @@ export const TIMEPIECES: Timepiece[] = [
     category: 'Grandes Complicaciones',
     priceCop: 198000000,
     image: '/src/assets/images/watch_tourbillon_titanium_1795474646347.jpg',
+    images: [
+      {
+        src: '/src/assets/images/watch_tourbillon_titanium_1795474646347.jpg',
+        label: 'Vista frontal',
+      },
+      {
+        src: '/src/assets/images/watch_bt03_angle_1795496667384.jpg',
+        label: 'Perfil 45°',
+      },
+      {
+        src: '/src/assets/images/watch_tourbillon_titanium_1795474646347.jpg',
+        label: 'Detalle mecanismo',
+        macroZoom: true,
+      },
+    ],
     aspectRatio: '1:1',
     availability: 'Bajo Pedido',
     editionNote: 'Pieza de colección bajo asignación',
@@ -85,6 +124,21 @@ export const TIMEPIECES: Timepiece[] = [
     category: 'Esfera Minimalista',
     priceCop: 96400000,
     image: '/src/assets/images/watch_minimal_dress_1795474646681.jpg',
+    images: [
+      {
+        src: '/src/assets/images/watch_minimal_dress_1795474646681.jpg',
+        label: 'Vista frontal',
+      },
+      {
+        src: '/src/assets/images/watch_bt04_angle_1795496667448.jpg',
+        label: 'Perfil extrafino',
+      },
+      {
+        src: '/src/assets/images/watch_minimal_dress_1795474646681.jpg',
+        label: 'Detalle esfera',
+        macroZoom: true,
+      },
+    ],
     aspectRatio: '1:1',
     availability: 'Disponible',
     editionNote: 'Perfil ultrafino de 6.1 mm',
@@ -108,6 +162,21 @@ export const TIMEPIECES: Timepiece[] = [
     category: 'Buceo Técnico',
     priceCop: 69200000,
     image: '/src/assets/images/watch_diver_ceramic_1795474647523.jpg',
+    images: [
+      {
+        src: '/src/assets/images/watch_diver_ceramic_1795474647523.jpg',
+        label: 'Vista frontal',
+      },
+      {
+        src: '/src/assets/images/watch_bt05_angle_1795496667654.jpg',
+        label: 'Perfil bisel y corona',
+      },
+      {
+        src: '/src/assets/images/watch_diver_ceramic_1795474647523.jpg',
+        label: 'Detalle esfera',
+        macroZoom: true,
+      },
+    ],
     aspectRatio: '1:1',
     availability: 'Disponible',
     editionNote: 'Resistencia profesional hasta 300 m',
@@ -123,32 +192,8 @@ export const TIMEPIECES: Timepiece[] = [
       waterResistance: '300 m / 30 bar',
     },
   },
-    {
-    id: 'bt-07',
-    reference: 'REF. BT-07.NEW',
-    collection: 'Cronómetro Negro',
-    name: 'Cronómetro Negro Oro Rosa',
-    category: 'Cronógrafos',
-    priceCop: 85000000,
-    image: '/src/assets/images/reloj-nuevo.jpg',
-    aspectRatio: '4:3',
-    availability: 'Edición Numerada',
-    editionNote: 'Disponibilidad inmediata en Barranquilla',
-    isFlagship: false,
-    description:
-      'Cronógrafo mecánico en acero con detalles en oro rosa. Esfera negra satinada con contadores de precisión y cristal de zafiro.',
-    specs: {
-      diameter: '41.0 mm',
-      thickness: '11.4 mm',
-      movement: 'Automático',
-      powerReserve: '72 h',
-      caseMaterial: 'Acero y Oro Rosa',
-      crystal: 'Zafiro abombado antirreflejos',
-      waterResistance: '100 m / 10 bar',
-    },
-  },
 ];
-  
+
 export const BARRANQUILLA_LOCATION = {
   city: 'Barranquilla',
   country: 'Colombia',
@@ -156,7 +201,11 @@ export const BARRANQUILLA_LOCATION = {
   detail: 'Atención presencial y asesoría personalizada en Barranquilla',
 };
 
-export const CONCIERGE_WHATSAPP_NUMBER = '573046095806';
+export const DEFAULT_WHATSAPP_NUMBER = '573005550194';
+
+export function sanitizePhoneNumber(raw: string): string {
+  return raw.replace(/\D/g, '');
+}
 
 export function formatCop(amount: number): string {
   return `${new Intl.NumberFormat('es-CO', {
@@ -166,6 +215,10 @@ export function formatCop(amount: number): string {
   }).format(amount)} COP`;
 }
 
-export function buildWhatsAppUrl(message: string): string {
-  return `https://wa.me/${CONCIERGE_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+export function buildWhatsAppUrl(
+  message: string,
+  phoneNumber: string = DEFAULT_WHATSAPP_NUMBER
+): string {
+  const cleanNumber = sanitizePhoneNumber(phoneNumber) || DEFAULT_WHATSAPP_NUMBER;
+  return `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
 }

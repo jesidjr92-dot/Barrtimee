@@ -6,12 +6,14 @@ import { WatchImageChamber } from './WatchImageChamber';
 
 interface TimepieceDetailModalProps {
   watch: Timepiece | null;
+  whatsappNumber: string;
   onClose: () => void;
   onAddToBag: (watch: Timepiece) => void;
 }
 
 export function TimepieceDetailModal({
   watch,
+  whatsappNumber,
   onClose,
   onAddToBag,
 }: TimepieceDetailModalProps) {
@@ -37,7 +39,8 @@ export function TimepieceDetailModal({
   if (!watch) return null;
 
   const whatsappUrl = buildWhatsAppUrl(
-    `Hola Barrtime Barranquilla, deseo información para adquirir el reloj ${watch.name} (${watch.reference}). Precio: ${formatCop(watch.priceCop)}.`
+    `Hola Barrtime Barranquilla, deseo adquirir el reloj ${watch.name} (${watch.reference}). Precio: ${formatCop(watch.priceCop)}.`,
+    whatsappNumber
   );
 
   const handleAdd = () => {
@@ -75,12 +78,13 @@ export function TimepieceDetailModal({
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12">
-          {/* Galería izquierda */}
+          {/* Galería deslizable izquierda */}
           <div className="border-b border-white/[0.08] bg-[#121214] p-6 lg:col-span-6 lg:border-r lg:border-b-0">
             <div className="lg:sticky lg:top-20">
               <div className="overflow-hidden rounded-[4px] border border-white/[0.08]">
                 <WatchImageChamber
                   src={watch.image}
+                  images={watch.images}
                   alt={watch.name}
                   reference={watch.reference}
                   aspectClass="aspect-square"
@@ -88,7 +92,7 @@ export function TimepieceDetailModal({
                 />
               </div>
 
-              <div className="mt-4 flex items-center justify-between gap-4">
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
                 <button
                   type="button"
                   onClick={() => setLowLightMode((prev) => !prev)}
@@ -103,13 +107,13 @@ export function TimepieceDetailModal({
                 </button>
 
                 <span className="text-[12px] text-[#94a3b8]">
-                  {watch.editionNote}
+                  Desliza para ver más ángulos
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Módulo de compra solo reloj */}
+          {/* Módulo de compra */}
           <div className="flex flex-col justify-between p-6 md:p-8 lg:col-span-6">
             <div>
               <div className="flex items-center justify-between gap-4">

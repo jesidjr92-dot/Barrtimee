@@ -1,9 +1,14 @@
 import { MapPin, MessageCircle } from 'lucide-react';
 import { BARRANQUILLA_LOCATION, buildWhatsAppUrl } from '../data/horologyData';
 
-export function ConciergeFooter() {
+interface ConciergeFooterProps {
+  whatsappNumber: string;
+}
+
+export function ConciergeFooter({ whatsappNumber }: ConciergeFooterProps) {
   const directWhatsAppUrl = buildWhatsAppUrl(
-    'Hola Barrtime Barranquilla, deseo asesoría personalizada sobre los relojes disponibles.'
+    'Hola Barrtime Barranquilla, deseo asesoría personalizada sobre los relojes disponibles.',
+    whatsappNumber
   );
 
   return (
