@@ -118,7 +118,30 @@ export const TIMEPIECES: Timepiece[] = [
     },
   },
 ];
-
+  {
+    id: 'bt-07',
+    reference: 'REF. BT-07.NEW',
+    collection: 'Cronómetro Negro',
+    name: 'Cronómetro Negro Oro Rosa',
+    category: 'Cronógrafos',
+    priceCop: 85000000,
+    image: '/src/assets/images/reloj-nuevo.jpg',
+    aspectRatio: '4:3',
+    availability: 'Edición Numerada',
+    editionNote: 'Disponibilidad inmediata en Barranquilla',
+    isFlagship: false,
+    description:
+      'Cronógrafo mecánico en acero con detalles en oro rosa. Esfera negra satinada con contadores de precisión y cristal de zafiro.',
+    specifications: {
+      diameter: '41.0 mm',
+      thickness: '11.4 mm',
+      movement: 'Automático',
+      powerReserve: '72 h',
+      caseMaterial: 'Acero y Oro Rosa',
+      crystal: 'Zafiro abombado antirreflejos',
+      waterResistance: '100 m / 10 bar',
+    },
+  },
 export const BARRANQUILLA_LOCATION = {
   city: 'Barranquilla',
   country: 'Colombia',
