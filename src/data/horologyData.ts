@@ -47,18 +47,18 @@ export const TIMEPIECES: Timepiece[] = [
     name: 'Cronógrafo Acero 904L',
     category: 'Cronógrafos',
     priceCop: 63900,
-    image: '/src/assets/images/watch_chronograph_steel_1795474645685.jpg',
+    image: '/src/assets/images/technoplata.jpeg',
     images: [
       {
-        src: '/src/assets/images/watch_chronograph_steel_1795474645685.jpg',
+        src: '/src/assets/images/technonegro.jpeg',
         label: 'Vista frontal',
       },
       {
-        src: '/src/assets/images/watch_bt02_angle_1795496667737.jpg',
+        src: '/src/assets/images/technoarco.jpeg',
         label: 'Perfil 45°',
       },
       {
-        src: '/src/assets/images/watch_chronograph_steel_1795474645685.jpg',
+        src: '/src/assets/images/technorosa.jpeg',
         label: 'Detalle esfera',
         macroZoom: true,
       },
