@@ -5,7 +5,7 @@ export const TIMEPIECES: Timepiece[] = [
     id: 'bt-01',
     reference: 'REF. BT-01.TI',
     collection: 'Cronómetro Negro',
-    name: 'Cronómetro Negro Titanio',
+    name: 'Casio Retro Acero',
     category: 'Cronógrafos',
     priceCop: 84900,
     image: '/src/assets/images/casioplata.jpeg',
