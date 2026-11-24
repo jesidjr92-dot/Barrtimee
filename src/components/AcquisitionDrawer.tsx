@@ -8,6 +8,7 @@ import {
   Trash2,
   X,
 } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useMemo, useState } from 'react';
 import {
   buildWhatsAppUrl,
@@ -128,8 +129,6 @@ export function AcquisitionDrawer({
     [whatsappMessage, whatsappNumber]
   );
 
-  if (!isOpen) return null;
-
   const handleSaveWhatsApp = () => {
     const cleaned = sanitizePhoneNumber(draftNumber);
     onChangeWhatsAppNumber(cleaned || DEFAULT_WHATSAPP_NUMBER);
@@ -147,16 +146,28 @@ export function AcquisitionDrawer({
   };
 
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="bag-drawer-title"
-      className="fixed inset-0 z-50 flex justify-end bg-black/75 backdrop-blur-sm"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
-      <aside className="flex h-full w-full max-w-[500px] flex-col border-l border-white/[0.12] bg-[#0a0a0b]">
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="bag-drawer-title"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed inset-0 z-50 flex justify-end bg-black/75 backdrop-blur-sm"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) onClose();
+          }}
+        >
+          <motion.aside
+            initial={{ x: '100%', opacity: 0.5 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: '100%', opacity: 0.5 }}
+            transition={{ duration: 0.34, ease: [0.16, 1, 0.3, 1] }}
+            className="flex h-full w-full max-w-[500px] flex-col border-l border-white/[0.12] bg-[#0a0a0b]"
+          >
         {/* Cabecera */}
         <div className="flex items-center justify-between border-b border-white/[0.08] px-6 py-4">
           <div className="flex items-center gap-3">
@@ -426,7 +437,9 @@ export function AcquisitionDrawer({
             </div>
           </div>
         )}
-      </aside>
-    </div>
+          </motion.aside>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

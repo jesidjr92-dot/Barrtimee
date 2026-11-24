@@ -1,4 +1,5 @@
 import { Check, X } from 'lucide-react';
+import { MotionConfig } from 'motion/react';
 import { useEffect, useMemo, useState } from 'react';
 import { AcquisitionDrawer } from './components/AcquisitionDrawer';
 import { CollectionSection } from './components/CollectionSection';
@@ -7,11 +8,15 @@ import { ConciergeFooter } from './components/ConciergeFooter';
 import { HeroShowcase } from './components/HeroShowcase';
 import { Navbar } from './components/Navbar';
 import { TimepieceDetailModal } from './components/TimepieceDetailModal';
-import { DEFAULT_WHATSAPP_NUMBER, TIMEPIECES } from './data/horologyData';
+import {
+  DEFAULT_WHATSAPP_NUMBER,
+  TIMEPIECES,
+  WOMEN_TIMEPIECES,
+} from './data/horologyData';
 import { CartItem, Timepiece, WatchColorVariant } from './types/horology';
 
-const STORAGE_CART_KEY = 'barrtime_bag_variants_v1';
-const STORAGE_WHATSAPP_KEY = 'barrtime_whatsapp_v1';
+const STORAGE_CART_KEY = 'barrtime_bag_variants_v2';
+const STORAGE_WHATSAPP_KEY = 'barrtime_whatsapp_v2';
 
 export default function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
@@ -63,6 +68,11 @@ export default function App() {
     return () => window.clearTimeout(timer);
   }, [toastMessage]);
 
+  const allTimepieces = useMemo(
+    () => [...TIMEPIECES, ...WOMEN_TIMEPIECES],
+    []
+  );
+
   const flagshipWatch = TIMEPIECES.find((w) => w.isFlagship) ?? TIMEPIECES[0];
 
   const totalBagCount = useMemo(
@@ -71,8 +81,8 @@ export default function App() {
   );
 
   const comparedWatches = useMemo(
-    () => TIMEPIECES.filter((w) => compareIds.includes(w.id)),
-    [compareIds]
+    () => allTimepieces.filter((w) => compareIds.includes(w.id)),
+    [allTimepieces, compareIds]
   );
 
   const handleInspectWatch = (watch: Timepiece, variantIndex: number = 0) => {
@@ -134,6 +144,7 @@ export default function App() {
   };
 
   return (
+    <MotionConfig reducedMotion="user">
     <div className="min-h-screen bg-[#0a0a0b] text-[#e5e2e3]">
       <Navbar cartCount={totalBagCount} onOpenBag={() => setIsBagOpen(true)} />
 
@@ -162,6 +173,7 @@ export default function App() {
 
         <CollectionSection
           timepieces={TIMEPIECES}
+          womenTimepieces={WOMEN_TIMEPIECES}
           compareIds={compareIds}
           onToggleCompare={handleToggleCompare}
           onOpenCompare={() => setIsCompareOpen(true)}
@@ -193,7 +205,7 @@ export default function App() {
       <AcquisitionDrawer
         isOpen={isBagOpen}
         items={cartItems}
-        timepieces={TIMEPIECES}
+        timepieces={allTimepieces}
         whatsappNumber={whatsappNumber}
         onChangeWhatsAppNumber={setWhatsappNumber}
         onClose={() => setIsBagOpen(false)}
@@ -232,5 +244,6 @@ export default function App() {
         </div>
       )}
     </div>
+    </MotionConfig>
   );
 }

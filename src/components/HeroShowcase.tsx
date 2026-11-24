@@ -47,9 +47,9 @@ export function HeroShowcase({
   return (
     <section id="inicio" className="border-b border-white/[0.08] bg-[#0a0a0b]">
       <div className="mx-auto max-w-[1440px] px-5 pt-10 pb-12 md:px-10 md:pt-16 md:pb-16 lg:px-16">
-        <div className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-12 lg:gap-12">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
           {/* Columna editorial izquierda */}
-          <div className="flex flex-col justify-between lg:col-span-6">
+          <div className="flex flex-col justify-between lg:col-span-7">
             <div>
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-medium uppercase tracking-[0.18em] text-[#94a3b8]">
                 <span>Barranquilla, Colombia</span>
@@ -125,29 +125,29 @@ export function HeroShowcase({
           </div>
 
           {/* Columna de galería deslizable principal */}
-          <div className="flex flex-col lg:col-span-6">
-            <div className="specular-card flex h-full flex-col overflow-hidden rounded-[4px]">
-              <div className="relative flex-1 overflow-hidden">
+          <div className="flex justify-center lg:col-span-5 lg:justify-end">
+            <div className="specular-card flex w-full max-w-[370px] flex-col overflow-hidden rounded-[4px]">
+              <div className="relative overflow-hidden">
                 <WatchImageChamber
                   variants={flagship.variants}
                   selectedIndex={selectedVariantIdx}
                   onSelectIndex={setSelectedVariantIdx}
                   alt={activeVariant.productName}
                   reference={flagship.reference}
-                  aspectClass="aspect-[4/3] lg:h-full lg:aspect-auto"
+                  aspectClass="aspect-[4/5]"
                   onImageClick={() =>
                     onInspectFlagship(flagship, selectedVariantIdx)
                   }
                 />
               </div>
 
-              <div className="border-t border-white/[0.08] bg-[#121214] px-5 py-4">
-                <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="border-t border-white/[0.08] bg-[#121214] px-4 py-3.5">
+                <div className="flex flex-wrap items-center justify-between gap-2">
                   <div>
                     <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[#94a3b8]">
                       {flagship.collection} · {flagship.editionNote}
                     </p>
-                    <p className="mt-1 text-[17px] font-normal tracking-[-0.01em] text-white">
+                    <p className="mt-1 text-[16px] font-normal tracking-[-0.01em] text-white">
                       {activeVariant.productName}
                     </p>
                   </div>
@@ -156,19 +156,17 @@ export function HeroShowcase({
                     onClick={() =>
                       onInspectFlagship(flagship, selectedVariantIdx)
                     }
-                    className="rounded-[4px] border border-white/[0.14] px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.16em] text-[#e2e8f0] hover:border-white/40 hover:text-white cursor-pointer"
+                    className="rounded-[4px] border border-white/[0.14] px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.16em] text-[#e2e8f0] hover:border-white/40 hover:text-white cursor-pointer"
                   >
                     Inspeccionar
                   </button>
                 </div>
 
-                <div className="mt-3 flex items-center justify-between border-t border-white/[0.06] pt-3">
-                  <div className="flex items-center gap-3 text-[12px] text-[#94a3b8] tabular-nums">
+                <div className="mt-2.5 flex items-center justify-between border-t border-white/[0.06] pt-2.5">
+                  <div className="flex items-center gap-2 text-[11px] text-[#94a3b8] tabular-nums">
                     <span>{flagship.specs.diameter}</span>
                     <span aria-hidden="true">/</span>
                     <span>{flagship.specs.waterResistance}</span>
-                    <span aria-hidden="true">/</span>
-                    <span>{flagship.specs.powerReserve}</span>
                   </div>
                   <button
                     type="button"

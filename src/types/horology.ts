@@ -11,22 +11,18 @@ export interface Timepiece {
   reference: string;
   collection: string;
   name: string;
-  category:
-    | 'Cronógrafos'
-    | 'Grandes Complicaciones'
-    | 'Esfera Minimalista'
-    | 'Buceo Técnico';
+  category: string;
   priceCop: number;
   variants: WatchColorVariant[];
-  aspectRatio: '1:1' | '4:3';
-  availability: 'Disponible' | 'Edición Numerada' | 'Bajo Pedido';
+  aspectRatio: '1:1' | '4:3' | '3:4' | '4:5';
+  availability: 'Disponible' | 'Edición Numerada' | 'Bajo Pedido' | 'Próximamente';
   editionNote: string;
   description: string;
   specs: {
     diameter: string;
     thickness: string;
     movement: string;
-    powerReserve: string;
+    strapMaterial: string;
     caseMaterial: string;
     crystal: string;
     waterResistance: string;

@@ -95,7 +95,7 @@ export function CompareModal({
                           }
                           alt={activeVariant.productName}
                           reference={watch.reference}
-                          aspectClass="aspect-square"
+                          aspectClass="aspect-[3/4]"
                         />
                         <button
                           type="button"
@@ -169,13 +169,10 @@ export function CompareModal({
                 ))}
               </tr>
               <tr>
-                <td className="py-3.5 pr-4 text-[#94a3b8]">Reserva de marcha</td>
+                <td className="py-3.5 pr-4 text-[#94a3b8]">Correa / Pulso</td>
                 {watches.map((w) => (
-                  <td
-                    key={w.id}
-                    className="px-4 py-3.5 font-mono text-[#e2e8f0] tabular-nums"
-                  >
-                    {w.specs.powerReserve}
+                  <td key={w.id} className="px-4 py-3.5 text-[#e2e8f0]">
+                    {w.specs.strapMaterial}
                   </td>
                 ))}
               </tr>

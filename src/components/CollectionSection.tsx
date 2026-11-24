@@ -6,6 +6,7 @@ import { WatchImageChamber } from './WatchImageChamber';
 
 interface CollectionSectionProps {
   timepieces: Timepiece[];
+  womenTimepieces: Timepiece[];
   compareIds: string[];
   onToggleCompare: (watchId: string) => void;
   onOpenCompare: () => void;
@@ -16,6 +17,7 @@ interface CollectionSectionProps {
 
 export function CollectionSection({
   timepieces,
+  womenTimepieces,
   compareIds,
   onToggleCompare,
   onOpenCompare,
@@ -23,7 +25,6 @@ export function CollectionSection({
   onInspectWatch,
   onQuickAdd,
 }: CollectionSectionProps) {
-  const collectionWatches = timepieces.filter((w) => !w.isFlagship);
   const [selectedVariantByWatch, setSelectedVariantByWatch] = useState<
     Record<string, number>
   >({});
@@ -33,6 +34,129 @@ export function CollectionSection({
 
   const setSelectedIndex = (watchId: string, idx: number) => {
     setSelectedVariantByWatch((prev) => ({ ...prev, [watchId]: idx }));
+  };
+
+  const renderWatchCard = (watch: Timepiece) => {
+    const isCompared = compareIds.includes(watch.id);
+    const selectedIdx = getSelectedIndex(watch.id);
+    const activeVariant = watch.variants[selectedIdx] ?? watch.variants[0];
+
+    return (
+      <article
+        key={watch.id}
+        className="specular-card group flex flex-col justify-between overflow-hidden rounded-[4px]"
+      >
+        <div>
+          <div className="relative border-b border-white/[0.08]">
+            <WatchImageChamber
+              variants={watch.variants}
+              selectedIndex={selectedIdx}
+              onSelectIndex={(idx) => setSelectedIndex(watch.id, idx)}
+              alt={activeVariant.productName}
+              reference={watch.reference}
+              aspectClass="aspect-[3/4]"
+              onImageClick={() => onInspectWatch(watch, selectedIdx)}
+            />
+
+            <button
+              type="button"
+              onClick={() => onToggleCompare(watch.id)}
+              aria-pressed={isCompared}
+              title={
+                isCompared ? 'Quitar de comparación' : 'Añadir a comparación'
+              }
+              className={`absolute top-3 right-3 z-20 flex h-7 w-7 items-center justify-center rounded-[4px] border transition-colors cursor-pointer ${
+                isCompared
+                  ? 'border-white bg-white text-[#0a0a0b]'
+                  : 'border-white/20 bg-[#0a0a0b]/75 text-transparent hover:border-white/50'
+              }`}
+            >
+              <Check className="h-3.5 w-3.5 stroke-[2.2]" aria-hidden="true" />
+            </button>
+          </div>
+
+          <div className="p-5">
+            <div className="flex items-center justify-between gap-2 text-[10px] font-medium uppercase tracking-[0.18em] text-[#94a3b8]">
+              <span className="font-mono truncate">{watch.reference}</span>
+              <span className="shrink-0 text-[#c4c7c8]">
+                {watch.availability}
+              </span>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => onInspectWatch(watch, selectedIdx)}
+              className="mt-2.5 block text-left focus-visible:outline-none cursor-pointer"
+            >
+              <h3 className="min-h-[48px] text-[18px] font-medium leading-[1.35] text-white transition-colors group-hover:text-[#e2e8f0]">
+                {activeVariant.productName}
+              </h3>
+            </button>
+
+            <p className="mt-1 text-[12px] font-light text-[#94a3b8]">
+              {watch.collection} · {watch.category}
+            </p>
+
+            <dl className="mt-4 grid grid-cols-3 gap-2 border-y border-white/[0.08] py-3 text-[12px]">
+              <div>
+                <dt className="text-[10px] uppercase tracking-[0.14em] text-[#94a3b8]">
+                  Caja
+                </dt>
+                <dd className="mt-0.5 font-mono text-[#e2e8f0] tabular-nums">
+                  {watch.specs.diameter}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-[10px] uppercase tracking-[0.14em] text-[#94a3b8]">
+                  Movimiento
+                </dt>
+                <dd className="mt-0.5 truncate text-[#e2e8f0]">
+                  {watch.specs.movement}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-[10px] uppercase tracking-[0.14em] text-[#94a3b8]">
+                  Agua
+                </dt>
+                <dd className="mt-0.5 truncate font-mono text-[#e2e8f0] tabular-nums">
+                  {watch.specs.waterResistance.split('/')[0].trim()}
+                </dd>
+              </div>
+            </dl>
+
+            <div className="mt-4 flex items-baseline justify-between gap-2">
+              <span className="text-[11px] uppercase tracking-[0.14em] text-[#94a3b8]">
+                Precio
+              </span>
+              <span className="font-mono text-[15px] font-normal text-white tabular-nums">
+                {formatCop(watch.priceCop)}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 border-t border-white/[0.08]">
+          <button
+            type="button"
+            onClick={() => onInspectWatch(watch, selectedIdx)}
+            className="flex h-11 items-center justify-center gap-1.5 border-r border-white/[0.08] px-3 text-[11px] font-medium uppercase tracking-[0.14em] text-[#e2e8f0] transition-colors hover:bg-white/[0.04] hover:text-white cursor-pointer"
+          >
+            <span>Ver Detalles</span>
+            <ArrowUpRight
+              className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              aria-hidden="true"
+            />
+          </button>
+          <button
+            type="button"
+            onClick={() => onQuickAdd(watch, activeVariant)}
+            className="flex h-11 items-center justify-center px-3 text-[11px] font-medium uppercase tracking-[0.14em] text-white transition-colors hover:bg-white hover:text-[#0a0a0b] cursor-pointer"
+          >
+            + Añadir
+          </button>
+        </div>
+      </article>
+    );
   };
 
   return (
@@ -94,133 +218,30 @@ export function CollectionSection({
           </div>
         )}
 
-        {/* Cuadrícula de relojes */}
+        {/* Cuadrícula principal de relojes (de 4 en 4) */}
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {collectionWatches.map((watch) => {
-            const isCompared = compareIds.includes(watch.id);
-            const selectedIdx = getSelectedIndex(watch.id);
-            const activeVariant =
-              watch.variants[selectedIdx] ?? watch.variants[0];
+          {timepieces.map((watch) => renderWatchCard(watch))}
+        </div>
 
-            return (
-              <article
-                key={watch.id}
-                className="specular-card group flex flex-col justify-between overflow-hidden rounded-[4px]"
-              >
-                <div>
-                  <div className="relative border-b border-white/[0.08]">
-                    <WatchImageChamber
-                      variants={watch.variants}
-                      selectedIndex={selectedIdx}
-                      onSelectIndex={(idx) => setSelectedIndex(watch.id, idx)}
-                      alt={activeVariant.productName}
-                      reference={watch.reference}
-                      aspectClass="aspect-square"
-                      onImageClick={() => onInspectWatch(watch, selectedIdx)}
-                    />
+        {/* Subsección Colección de Mujer */}
+        <div className="mt-20 border-t border-white/[0.08] pt-14">
+          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#94a3b8]">
+                Catálogo · Dama
+              </p>
+              <h3 className="mt-2 text-[24px] font-light leading-[1.2] tracking-[-0.02em] text-white md:text-[32px]">
+                Colección de Mujer
+              </h3>
+            </div>
+            <p className="max-w-md text-[14px] font-light leading-[1.6] text-[#94a3b8]">
+              Desliza para ver las versiones disponibles de cada modelo femenino. Próximamente con fotografías oficiales.
+            </p>
+          </div>
 
-                    <button
-                      type="button"
-                      onClick={() => onToggleCompare(watch.id)}
-                      aria-pressed={isCompared}
-                      title={
-                        isCompared
-                          ? 'Quitar de comparación'
-                          : 'Añadir a comparación'
-                      }
-                      className={`absolute top-3 right-3 z-20 flex h-7 w-7 items-center justify-center rounded-[4px] border transition-colors cursor-pointer ${
-                        isCompared
-                          ? 'border-white bg-white text-[#0a0a0b]'
-                          : 'border-white/20 bg-[#0a0a0b]/75 text-transparent hover:border-white/50'
-                      }`}
-                    >
-                      <Check className="h-3.5 w-3.5 stroke-[2.2]" aria-hidden="true" />
-                    </button>
-                  </div>
-
-                  <div className="p-5">
-                    <div className="flex items-center justify-between gap-2 text-[10px] font-medium uppercase tracking-[0.18em] text-[#94a3b8]">
-                      <span className="font-mono truncate">{watch.reference}</span>
-                      <span className="shrink-0 text-[#c4c7c8]">
-                        {watch.availability}
-                      </span>
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={() => onInspectWatch(watch, selectedIdx)}
-                      className="mt-2.5 block text-left focus-visible:outline-none cursor-pointer"
-                    >
-                      <h3 className="min-h-[48px] text-[18px] font-medium leading-[1.35] text-white transition-colors group-hover:text-[#e2e8f0]">
-                        {activeVariant.productName}
-                      </h3>
-                    </button>
-
-                    <p className="mt-1 text-[12px] font-light text-[#94a3b8]">
-                      {watch.collection} · {watch.category}
-                    </p>
-
-                    <dl className="mt-4 grid grid-cols-3 gap-2 border-y border-white/[0.08] py-3 text-[12px]">
-                      <div>
-                        <dt className="text-[10px] uppercase tracking-[0.14em] text-[#94a3b8]">
-                          Caja
-                        </dt>
-                        <dd className="mt-0.5 font-mono text-[#e2e8f0] tabular-nums">
-                          {watch.specs.diameter}
-                        </dd>
-                      </div>
-                      <div>
-                        <dt className="text-[10px] uppercase tracking-[0.14em] text-[#94a3b8]">
-                          Reserva
-                        </dt>
-                        <dd className="mt-0.5 font-mono text-[#e2e8f0] tabular-nums">
-                          {watch.specs.powerReserve}
-                        </dd>
-                      </div>
-                      <div>
-                        <dt className="text-[10px] uppercase tracking-[0.14em] text-[#94a3b8]">
-                          Agua
-                        </dt>
-                        <dd className="mt-0.5 truncate font-mono text-[#e2e8f0] tabular-nums">
-                          {watch.specs.waterResistance.split('/')[0].trim()}
-                        </dd>
-                      </div>
-                    </dl>
-
-                    <div className="mt-4 flex items-baseline justify-between gap-2">
-                      <span className="text-[11px] uppercase tracking-[0.14em] text-[#94a3b8]">
-                        Precio
-                      </span>
-                      <span className="font-mono text-[15px] font-normal text-white tabular-nums">
-                        {formatCop(watch.priceCop)}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 border-t border-white/[0.08]">
-                  <button
-                    type="button"
-                    onClick={() => onInspectWatch(watch, selectedIdx)}
-                    className="flex h-11 items-center justify-center gap-1.5 border-r border-white/[0.08] px-3 text-[11px] font-medium uppercase tracking-[0.14em] text-[#e2e8f0] transition-colors hover:bg-white/[0.04] hover:text-white cursor-pointer"
-                  >
-                    <span>Ver Detalles</span>
-                    <ArrowUpRight
-                      className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                      aria-hidden="true"
-                    />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => onQuickAdd(watch, activeVariant)}
-                    className="flex h-11 items-center justify-center px-3 text-[11px] font-medium uppercase tracking-[0.14em] text-white transition-colors hover:bg-white hover:text-[#0a0a0b] cursor-pointer"
-                  >
-                    + Añadir
-                  </button>
-                </div>
-              </article>
-            );
-          })}
+          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {womenTimepieces.map((watch) => renderWatchCard(watch))}
+          </div>
         </div>
       </div>
     </section>

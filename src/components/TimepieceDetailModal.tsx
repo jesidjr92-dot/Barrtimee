@@ -1,4 +1,5 @@
 import { Check, Eye, MessageCircle, ShieldCheck, X } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { buildWhatsAppUrl, formatCop } from '../data/horologyData';
 import { Timepiece, WatchColorVariant } from '../types/horology';
@@ -44,33 +45,49 @@ export function TimepieceDetailModal({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [watch, onClose]);
 
-  if (!watch) return null;
+  const activeVariant = watch
+    ? (watch.variants[selectedVariantIdx] ?? watch.variants[0])
+    : null;
 
-  const activeVariant =
-    watch.variants[selectedVariantIdx] ?? watch.variants[0];
-
-  const whatsappUrl = buildWhatsAppUrl(
-    `Hola Barrtime Barranquilla, deseo adquirir el reloj ${activeVariant.productName} (${watch.reference}). Precio: ${formatCop(watch.priceCop)}.`,
-    whatsappNumber
-  );
+  const whatsappUrl =
+    watch && activeVariant
+      ? buildWhatsAppUrl(
+          `Hola Barrtime Barranquilla, deseo adquirir el reloj ${activeVariant.productName} (${watch.reference}). Precio: ${formatCop(watch.priceCop)}.`,
+          whatsappNumber
+        )
+      : '#';
 
   const handleAdd = () => {
+    if (!watch || !activeVariant) return;
     onAddToBag(watch, activeVariant);
     setJustAdded(true);
     window.setTimeout(() => setJustAdded(false), 1800);
   };
 
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="pdp-watch-title"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-3 backdrop-blur-md md:p-6"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
-      <div className="relative max-h-[92vh] w-full max-w-[1060px] overflow-y-auto rounded-[4px] border border-white/[0.12] bg-[#0a0a0b]">
+    <AnimatePresence>
+      {watch && activeVariant && (
+        <motion.div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="pdp-watch-title"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-3 backdrop-blur-md md:p-6"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) onClose();
+          }}
+        >
+          <motion.div
+            key={watch.id}
+            initial={{ opacity: 0, y: 24, scale: 0.985 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 16, scale: 0.985 }}
+            transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+            className="relative max-h-[92vh] w-full max-w-[1060px] overflow-y-auto rounded-[4px] border border-white/[0.12] bg-[#0a0a0b]"
+          >
         {/* Cabecera del modal */}
         <div className="sticky top-0 z-10 flex items-center justify-between border-b border-white/[0.08] bg-[#0a0a0b]/95 px-6 py-4 backdrop-blur-md">
           <div className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.18em] text-[#94a3b8]">
@@ -99,7 +116,7 @@ export function TimepieceDetailModal({
                   onSelectIndex={setSelectedVariantIdx}
                   alt={activeVariant.productName}
                   reference={watch.reference}
-                  aspectClass="aspect-square"
+                  aspectClass="aspect-[3/4]"
                   lumeMode={lowLightMode}
                 />
               </div>
@@ -183,9 +200,9 @@ export function TimepieceDetailModal({
                     </dd>
                   </div>
                   <div className="flex justify-between py-2.5">
-                    <dt className="text-[#94a3b8]">Reserva de marcha</dt>
-                    <dd className="font-mono text-[#e2e8f0] tabular-nums">
-                      {watch.specs.powerReserve}
+                    <dt className="text-[#94a3b8]">Correa / Pulso</dt>
+                    <dd className="text-right text-[#e2e8f0]">
+                      {watch.specs.strapMaterial}
                     </dd>
                   </div>
                   <div className="flex justify-between py-2.5">
@@ -232,7 +249,9 @@ export function TimepieceDetailModal({
             </div>
           </div>
         </div>
-      </div>
-    </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

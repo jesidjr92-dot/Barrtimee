@@ -99,7 +99,7 @@ export function WatchImageChamber({
       onPointerUp={finishDrag}
       onPointerCancel={finishDrag}
       onClick={handleClick}
-      className={`group/slider relative overflow-hidden bg-[#121214] select-none touch-pan-y ${aspectClass} ${
+      className={`group/slider relative overflow-hidden bg-[#0a0a0b] select-none touch-pan-y ${aspectClass} ${
         onImageClick ? 'cursor-pointer' : ''
       } ${hasMultiple ? 'cursor-grab active:cursor-grabbing' : ''} ${className}`}
     >
@@ -112,11 +112,12 @@ export function WatchImageChamber({
         }}
       >
         {variants.map((variant, idx) => {
-          const isFailed = Boolean(failedSlides[idx]);
+          const isMissing = !variant.src;
+          const isFailed = isMissing || Boolean(failedSlides[idx]);
           return (
             <div
               key={`${variant.id}-${idx}`}
-              className="relative h-full w-full shrink-0 overflow-hidden"
+              className="relative h-full w-full shrink-0 overflow-hidden bg-[#0a0a0b]"
             >
               {!isFailed ? (
                 <img
@@ -128,32 +129,47 @@ export function WatchImageChamber({
                   onError={() =>
                     setFailedSlides((prev) => ({ ...prev, [idx]: true }))
                   }
-                  className={`h-full w-full object-cover transition-all duration-300 ease-out ${
+                  className={`h-full w-full object-cover object-center transition-all duration-300 ease-out ${
                     lumeMode
                       ? 'brightness-[0.65] contrast-[1.35] saturate-[0.85]'
                       : 'brightness-100 contrast-100'
                   }`}
                 />
               ) : (
-                <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-b from-[#18181b] to-[#0a0a0b] p-6 text-center">
-                  <svg
-                    viewBox="0 0 120 120"
-                    className="mb-3 h-24 w-24 text-[#94a3b8]/40"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.2"
-                    aria-hidden="true"
-                  >
-                    <rect x="42" y="8" width="36" height="16" rx="2" />
-                    <rect x="42" y="96" width="36" height="16" rx="2" />
-                    <circle cx="60" cy="60" r="36" />
-                    <circle cx="60" cy="60" r="30" strokeOpacity="0.4" />
-                    <line x1="60" y1="60" x2="60" y2="38" />
-                    <line x1="60" y1="60" x2="76" y2="66" />
-                  </svg>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#94a3b8]">
-                    {reference}
-                  </span>
+                <div
+                  className={`flex h-full w-full items-center justify-center bg-[#121214]/60 ${
+                    showControls ? 'p-4' : 'p-2'
+                  }`}
+                >
+                  <div className="flex h-full w-full flex-col items-center justify-center rounded-[4px] border border-dashed border-white/[0.14] bg-[#0a0a0b]/85 px-4 text-center">
+                    <svg
+                      viewBox="0 0 120 120"
+                      className={`${
+                        showControls ? 'mb-3 h-20 w-20' : 'h-10 w-10'
+                      } text-[#94a3b8]/45`}
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                      aria-hidden="true"
+                    >
+                      <rect x="44" y="10" width="32" height="16" rx="2" />
+                      <rect x="44" y="94" width="32" height="16" rx="2" />
+                      <circle cx="60" cy="60" r="32" />
+                      <circle cx="60" cy="60" r="25" strokeOpacity="0.45" />
+                      <line x1="60" y1="60" x2="60" y2="41" />
+                      <line x1="60" y1="60" x2="73" y2="66" />
+                    </svg>
+                    {showControls && (
+                      <>
+                        <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-[#e2e8f0]">
+                          Sin imagen · {variant.colorName}
+                        </span>
+                        <span className="mt-1.5 text-[11px] font-light text-[#94a3b8]">
+                          Espacio reservado · {reference}
+                        </span>
+                      </>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
