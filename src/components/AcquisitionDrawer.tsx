@@ -110,8 +110,8 @@ export function AcquisitionDrawer({
       ? `Hola Barrtime, soy ${buyerName.trim()} y quiero finalizar mi compra:`
       : 'Hola Barrtime, quiero finalizar mi compra con los siguientes relojes:';
 
-    return [header, '', ...lines, '', `Total a pagar: ${formatCop(total)}`].join('\n');
-  }, [resolvedItems, buyerName, total]);
+    return [header, '', ...lines].join('\n');
+  }, [resolvedItems, buyerName]);
 
   const whatsappCheckoutUrl = useMemo(
     () => buildWhatsAppUrl(whatsappMessage, whatsappNumber),
@@ -417,9 +417,6 @@ export function AcquisitionDrawer({
           </div>
         )}
       </aside>
-    </div>
-  );
-}
     </div>
   );
 }
