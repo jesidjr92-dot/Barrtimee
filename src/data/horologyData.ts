@@ -34,7 +34,7 @@ export const TIMEPIECES: Timepiece[] = [
     aspectRatio: '1:1',
     availability: 'Edición Numerada',
     editionNote: 'Disponibilidad inmediata en Barranquilla',
-    isFlagship: false,
+    isFlagship: true,
     description:
       'Diseño robusto, elegante y con carácter: el reloj ideal para quienes marcan la diferencia.',
     specs: {
