@@ -45,10 +45,10 @@ export function CollectionSection({
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
             <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#94a3b8]">
-              Archivo Contemporáneo
+              Catálogo
             </p>
             <h2 className="mt-2 text-[28px] font-light leading-[1.2] tracking-[-0.025em] text-white md:text-[40px]">
-              La Colección Permanente
+              Colección
             </h2>
           </div>
 
