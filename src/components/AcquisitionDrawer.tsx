@@ -110,8 +110,17 @@ export function AcquisitionDrawer({
       ? `Hola Barrtime, soy ${buyerName.trim()} y quiero finalizar mi compra:`
       : 'Hola Barrtime, quiero finalizar mi compra con los siguientes relojes:';
 
-    return [header, '', ...lines].join('\n');
-  }, [resolvedItems, buyerName]);
+    return [
+      header,
+      '',
+      ...lines,
+      '',
+      `Envío (${deliveryCity.trim() || 'Barranquilla'}): ${
+        shippingCost === 0 ? 'Cortesía' : formatCop(shippingCost)
+      }`,
+      `Total a pagar: ${formatCop(total)}`,
+    ].join('\n');
+  }, [resolvedItems, buyerName, deliveryCity, shippingCost, total]);
 
   const whatsappCheckoutUrl = useMemo(
     () => buildWhatsAppUrl(whatsappMessage, whatsappNumber),
