@@ -117,8 +117,7 @@ export const TIMEPIECES: Timepiece[] = [
       waterResistance: '300 m / 30 bar',
     },
   },
-];
-  {
+    {
     id: 'bt-07',
     reference: 'REF. BT-07.NEW',
     collection: 'Cronómetro Negro',
@@ -132,7 +131,7 @@ export const TIMEPIECES: Timepiece[] = [
     isFlagship: false,
     description:
       'Cronógrafo mecánico en acero con detalles en oro rosa. Esfera negra satinada con contadores de precisión y cristal de zafiro.',
-    specifications: {
+    specs: {
       diameter: '41.0 mm',
       thickness: '11.4 mm',
       movement: 'Automático',
@@ -142,6 +141,8 @@ export const TIMEPIECES: Timepiece[] = [
       waterResistance: '100 m / 10 bar',
     },
   },
+];
+  
 export const BARRANQUILLA_LOCATION = {
   city: 'Barranquilla',
   country: 'Colombia',
