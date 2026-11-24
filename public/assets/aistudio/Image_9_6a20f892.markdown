@@ -1,0 +1,224 @@
+---
+name: Modern Horology Quiet Luxury
+colors:
+  surface: '#131314'
+  surface-dim: '#131314'
+  surface-bright: '#3a393a'
+  surface-container-lowest: '#0e0e0f'
+  surface-container-low: '#1c1b1c'
+  surface-container: '#201f20'
+  surface-container-high: '#2a2a2b'
+  surface-container-highest: '#353436'
+  on-surface: '#e5e2e3'
+  on-surface-variant: '#c4c7c8'
+  inverse-surface: '#e5e2e3'
+  inverse-on-surface: '#313031'
+  outline: '#8e9192'
+  outline-variant: '#444748'
+  surface-tint: '#c6c6c7'
+  primary: '#ffffff'
+  on-primary: '#2f3131'
+  primary-container: '#e2e2e2'
+  on-primary-container: '#636565'
+  inverse-primary: '#5d5f5f'
+  secondary: '#c1c7cf'
+  on-secondary: '#2b3137'
+  secondary-container: '#41474e'
+  on-secondary-container: '#afb6bd'
+  tertiary: '#ffffff'
+  on-tertiary: '#003915'
+  tertiary-container: '#66ff8e'
+  on-tertiary-container: '#007433'
+  error: '#ffb4ab'
+  on-error: '#690005'
+  error-container: '#93000a'
+  on-error-container: '#ffdad6'
+  primary-fixed: '#e2e2e2'
+  primary-fixed-dim: '#c6c6c7'
+  on-primary-fixed: '#1a1c1c'
+  on-primary-fixed-variant: '#454747'
+  secondary-fixed: '#dde3eb'
+  secondary-fixed-dim: '#c1c7cf'
+  on-secondary-fixed: '#161c22'
+  on-secondary-fixed-variant: '#41474e'
+  tertiary-fixed: '#66ff8e'
+  tertiary-fixed-dim: '#3de273'
+  on-tertiary-fixed: '#002109'
+  on-tertiary-fixed-variant: '#005322'
+  background: '#131314'
+  on-background: '#e5e2e3'
+  surface-variant: '#353436'
+  carbon-base: '#0a0a0b'
+  carbon-surface: '#121214'
+  carbon-elevated: '#18181b'
+  steel-muted: '#94a3b8'
+  platinum-accent: '#e2e8f0'
+  glass-border: rgba(255, 255, 255, 0.08)
+  glass-border-hover: rgba(255, 255, 255, 0.22)
+  concierge-emerald: '#25d366'
+typography:
+  display:
+    fontFamily: Geist
+    fontSize: 56px
+    fontWeight: '300'
+    lineHeight: 64px
+    letterSpacing: -0.03em
+  display-mobile:
+    fontFamily: Geist
+    fontSize: 36px
+    fontWeight: '300'
+    lineHeight: 44px
+    letterSpacing: -0.02em
+  headline-lg:
+    fontFamily: Geist
+    fontSize: 40px
+    fontWeight: '300'
+    lineHeight: 48px
+    letterSpacing: -0.025em
+  headline-lg-mobile:
+    fontFamily: Geist
+    fontSize: 28px
+    fontWeight: '400'
+    lineHeight: 36px
+    letterSpacing: -0.015em
+  headline-md:
+    fontFamily: Geist
+    fontSize: 24px
+    fontWeight: '400'
+    lineHeight: 32px
+    letterSpacing: -0.01em
+  headline-sm:
+    fontFamily: Geist
+    fontSize: 18px
+    fontWeight: '500'
+    lineHeight: 26px
+    letterSpacing: 0em
+  title-md:
+    fontFamily: Geist
+    fontSize: 16px
+    fontWeight: '500'
+    lineHeight: 24px
+    letterSpacing: 0em
+  body-lg:
+    fontFamily: Geist
+    fontSize: 16px
+    fontWeight: '300'
+    lineHeight: 26px
+    letterSpacing: 0.01em
+  body-md:
+    fontFamily: Geist
+    fontSize: 14px
+    fontWeight: '300'
+    lineHeight: 22px
+    letterSpacing: 0.01em
+  body-sm:
+    fontFamily: Geist
+    fontSize: 12px
+    fontWeight: '400'
+    lineHeight: 18px
+    letterSpacing: 0.02em
+  label-caps:
+    fontFamily: Geist
+    fontSize: 11px
+    fontWeight: '500'
+    lineHeight: 16px
+    letterSpacing: 0.18em
+  label-sm:
+    fontFamily: Geist
+    fontSize: 12px
+    fontWeight: '400'
+    lineHeight: 16px
+    letterSpacing: 0.05em
+rounded:
+  sm: 0.125rem
+  DEFAULT: 0.25rem
+  md: 0.375rem
+  lg: 0.5rem
+  xl: 0.75rem
+  full: 9999px
+spacing:
+  gutter: 1.5rem
+  gutter-mobile: 1rem
+  margin: 4rem
+  margin-mobile: 1.25rem
+  space-xs: 0.25rem
+  space-sm: 0.5rem
+  space-md: 1rem
+  space-lg: 1.75rem
+  space-xl: 3rem
+---
+
+## Brand & Style
+
+The design system evolves into an ultra-modern aesthetic grounded in **Modern Swiss Horology and Quiet Luxury**. Moving decisively away from ornate, baroque serif traditions, the identity centers on austere architectural precision, razor-clean silhouettes, and quiet confidence. It addresses an elite tier of watch enthusiasts and minimalist connoisseurs who value craftsmanship, uncompromised materials, and technological clarity.
+
+The visual direction combines **Architectural Minimalism and Frosted Monochromatic Depth**:
+- **Deep Carbon Canvas:** Matte abyssal backdrops (`#0a0a0b` and `#121214`) absorb extraneous noise, creating an immaculate staging environment where watch photography, brushed bezels, and crystalline dials command undivided attention.
+- **Micro-Machined Linear Detailing:** Heavy shadows and skeuomorphic weight are replaced by hairline platinum strokes (`border-white/10`), ultra-fine grid alignments, and frosted glass overlays that mirror anti-reflective sapphire crystal.
+- **Editorial Sans-Serif Restraint:** Typography is stripped of historical flourishes. Clean grotesque forms with generous tracking and refined weights establish a balanced rhythm between industrial watchmaking and avant-garde editorial publishing.
+
+## Colors
+
+The color palette is strictly controlled, monochromatic, and metallic, engineered to emulate brushed steel, titanium, and smoked anti-reflective glass:
+
+- **Primary (`#ffffff`):** Pure optical white, utilized with disciplined hierarchy for high-priority headlines, key interaction triggers, and active states.
+- **Secondary (`#e2e8f0`):** Platinum steel. Provides refined metallic tonality for subheadings, active micro-borders, and tactile icon accents.
+- **Tertiary (`#25d366`):** Concierge emerald. Strictly restricted to direct acquisition touchpoints (WhatsApp checkout and personal consultation triggers), ensuring immediate clarity without breaking the dark monochrome atmosphere.
+- **Neutral (`#0a0a0b`):** Deep matte carbon canvas. Eliminates glare and sets a zero-reflection environment.
+- **Named Colors:** Surface tiers step subtly through `#121214` and `#18181b`, punctuated by hairline borders (`rgba(255, 255, 255, 0.08)`) and muted slate text (`#94a3b8`) for technical indices.
+
+## Typography
+
+The type system is completely unified around **Geist**, a high-precision, contemporary geometric grotesque designed with pristine kerning, neutral geometry, and technical authority. Traditional serifs are eliminated entirely.
+
+- **Weight Discipline:** Headlines employ light (`300`) to regular (`400`) weights with tighter negative tracking (`-0.03em` to `-0.01em`), achieving an architectural, understated luxury look rather than bulky commercial boldness.
+- **Technical Indexing (`label-caps`):** Sub-labels, serial numbers, caliber details, and brand references use uppercase settings paired with expansive tracking (`0.18em`), recalling the meticulous engraved dials of modern independent Swiss watchmakers.
+- **Body & Legibility:** Descriptive narrative and horological specifications leverage regular and light cuts (`300` and `400`), guaranteeing instant parsing across all display densities.
+
+## Layout & Spacing
+
+The layout is governed by an open 12-column architectural grid defined by generous negative space and surgical alignment:
+
+- **Desktop (1200px+):** Outer canvas margins expand to `4rem` (capped at a 1440px reading container) with `1.5rem` gutters. Horological product grids conform to clean 3-column or 4-column balanced modules with ample interstitial breathing room.
+- **Tablet (768px – 1199px):** Adapts to an 8-column system with `2.5rem` margin and `1.25rem` gutter, utilizing 2-column card distributions.
+- **Mobile (<768px):** Collapses to a 4-column framework with `1.25rem` margin. Showcases transition to single-column focus cards or edge-to-edge touch carousels.
+
+Spacing strictly follows mathematical increments where macro-negative space acts as an active visual element, signaling calm luxury and effortless confidence.
+
+## Elevation & Depth
+
+Depth is established through **Smoked Glass Surfaces and Hairline Specular Borders**, completely rejecting heavy, muddy drop shadows:
+
+- **Base Canvas:** Matte carbon `#0a0a0b`.
+- **Containers & Modules:** Layered with subtle smoked glass (`background: rgba(18, 18, 20, 0.75)` with `backdrop-filter: blur(12px)`).
+- **Hairline Specular Borders:** Cards, modals, and input fields define their boundaries exclusively via crisp 1px borders of `rgba(255, 255, 255, 0.08)`.
+- **Specular Hover State:** Interactive surfaces elevate not by moving upward or casting diffuse dark shadows, but by illuminating their perimeter line to `rgba(255, 255, 255, 0.22)` accompanied by an imperceptible internal glow (`inset 0 0 12px rgba(255, 255, 255, 0.02)`).
+
+## Shapes
+
+The design system employs **Soft Linear Geometry (`roundedness: 1`)**:
+
+- Cards, action buttons, dialogs, and input containers maintain an exacting `0.25rem` (4px) corner radius. This honors the beveled facets, lugs, and geometric cases of modern avant-garde timepieces without falling into clinical sharpness.
+- Status badges and technical tags scale down to an ultra-refined `0.125rem` (2px) radius.
+- Circular rounding (`rounded-full`) is isolated strictly to circular dial indicators, status indicators, and image carousel pagers.
+
+## Components
+
+### Buttons
+- **Primary Linear Button:** Clean white solid background (`#ffffff`), pitch carbon text (`#0a0a0b`), 4px border radius, set in `label-caps` (`Geist`, medium weight, tracking `0.15em`). On hover, transitions cleanly to platinum (`#e2e8f0`) with subtle specular glow.
+- **Ghost Linear Button:** Pure transparent or smoked base with a 1px boundary (`rgba(255, 255, 255, 0.15)`), platinum text (`#e2e8f0`). On hover, border brightens to `rgba(255, 255, 255, 0.4)` with an internal fill of `rgba(255, 255, 255, 0.04)`.
+- **Concierge CTA:** Minimalist deep slate base (`#0f1712`) with a hairline emerald boundary (`rgba(37, 211, 102, 0.35)`) and `#25d366` typography, maintaining low-noise luxury while facilitating fast mobile conversion.
+
+### Timepiece Showcase Cards
+- **Image Chamber:** Pristine 1:1 or 4:5 frame set against a dark smoked backdrop (`rgba(18, 18, 20, 0.6)`), devoid of harsh vignettes, prioritizing authentic sapphire reflections and case grain.
+- **Spec Grid & Metadata:** Model reference and collection name set in `label-caps` (`#94a3b8`), model name rendered in light-weight `headline-sm` (`#ffffff`), followed by minimalist tabular data (diameter, caliber, power reserve) formatted cleanly with hairline dividers.
+- **Linear Footers:** Direct link actions integrated as flush, borderless button rows with subtle micro-arrow transitions on hover.
+
+### Chips & Badges
+- Micro-proportioned rectangular badges (`0.125rem` radius) utilizing a translucent carbon background (`rgba(255, 255, 255, 0.05)`) with a 1px border (`rgba(255, 255, 255, 0.12)`) and platinum uppercase micro-typography (`10px`, tracking `0.18em`).
+
+### Input Fields
+- Understated architectural inputs: Solid `#121214` surface with a 1px perimeter border (`rgba(255, 255, 255, 0.08)`). Placeholder text in muted slate (`#94a3b8`). On focus, the border transitions smoothly to crisp platinum (`#e2e8f0`) without colored drop-shadow glows.
+
+### Checkboxes & Segmented Controls
+- Minimal square controls (4px radius) with hairline platinum borders. Active states fill with solid `#ffffff` and a carbon glyph, delivering immediate tactile feedback through minimal means.
