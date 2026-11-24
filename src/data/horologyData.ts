@@ -4,8 +4,8 @@ export const TIMEPIECES: Timepiece[] = [
   {
    id: 'bt-01',
     reference: 'REF. BT-01.TI',
-    collection: 'Cronómetro Negro',
-    name: 'Cronómetro Negro Titanio',
+    collection: '',
+    name: '',
     category: 'Cronógrafos',
     priceCop: 78500000,
     image: '/src/assets/images/logobarrtime.jpeg',
@@ -16,13 +16,13 @@ export const TIMEPIECES: Timepiece[] = [
     description:
       'Cronógrafo mecánico en titanio Grado 5 y bisel cerámico negro micrograbado. Esfera antracita satinada vertical con contadores de precisión y cristal de zafiro con doble tratamiento antirreflejos.',
     specs: {
-      diameter: '41.0 mm',
-      thickness: '11.4 mm',
+      diameter: '',
+      thickness: '',
       movement: 'Automático',
-      powerReserve: '72 h',
+      powerReserve: '',
       caseMaterial: 'Titanio Grado 5 y Cerámica Negra',
       crystal: 'Zafiro abombado antirreflejos',
-      waterResistance: '100 m / 10 bar',
+      waterResistance: '',
    
     
     },
