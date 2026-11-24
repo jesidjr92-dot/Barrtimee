@@ -107,7 +107,7 @@ export function WatchImageChamber({
       <div
         className="flex h-full w-full transition-transform duration-300 ease-out"
         style={{
-          transform: translate3d(calc(-${safeIndex * 100}% + ${dragOffsetPx}px), 0, 0),
+          transform: `translate3d(calc(-${safeIndex * 100}% + ${dragOffsetPx}px), 0, 0)`,
           transitionDuration: dragStartX.current !== null ? '0ms' : '280ms',
         }}
       >
@@ -115,13 +115,13 @@ export function WatchImageChamber({
           const isFailed = Boolean(failedSlides[idx]);
           return (
             <div
-              key={${variant.id}-${idx}}
+              key={`${variant.id}-${idx}`}
               className="relative h-full w-full shrink-0 overflow-hidden"
             >
               {!isFailed ? (
                 <img
                   src={variant.src}
-                  alt={${alt} — ${variant.colorName}}
+                  alt={`${alt} — ${variant.colorName}`}
                   referrerPolicy="no-referrer"
                   loading="lazy"
                   draggable={false}
@@ -201,9 +201,9 @@ export function WatchImageChamber({
           >
             {variants.map((variant, idx) => (
               <button
-                key={${variant.id}-${idx}}
+                key={`${variant.id}-${idx}`}
                 type="button"
-                aria-label={Ver ${variant.colorName}}
+                aria-label={`Ver ${variant.colorName}`}
                 aria-current={idx === safeIndex}
                 onClick={(e) => {
                   e.stopPropagation();
