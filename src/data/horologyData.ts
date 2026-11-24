@@ -2,13 +2,13 @@ import { Timepiece } from '../types/horology';
 
 export const TIMEPIECES: Timepiece[] = [
   {
-   id: 'bt-01',
+    id: 'bt-01',
     reference: 'REF. BT-01.TI',
-    collection: '',
-    name: '',
+    collection: 'Cronómetro Negro',
+    name: 'Cronómetro Negro Titanio',
     category: 'Cronógrafos',
     priceCop: 78500000,
-    image: '/src/assets/images/logobarrtime.jpeg',
+    image: '/src/assets/images/hero_horology_flagship_1795474645218.jpg',
     aspectRatio: '4:3',
     availability: 'Edición Numerada',
     editionNote: 'Disponibilidad inmediata en Barranquilla',
@@ -16,13 +16,13 @@ export const TIMEPIECES: Timepiece[] = [
     description:
       'Cronógrafo mecánico en titanio Grado 5 y bisel cerámico negro micrograbado. Esfera antracita satinada vertical con contadores de precisión y cristal de zafiro con doble tratamiento antirreflejos.',
     specs: {
-      diameter: '',
-      thickness: '',
+      diameter: '41.0 mm',
+      thickness: '11.4 mm',
       movement: 'Automático',
-      powerReserve: '',
+      powerReserve: '72 h',
       caseMaterial: 'Titanio Grado 5 y Cerámica Negra',
       crystal: 'Zafiro abombado antirreflejos',
-      waterResistance: '',
+      waterResistance: '100 m / 10 bar',
    
     
     },
