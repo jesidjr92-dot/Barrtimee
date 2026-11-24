@@ -201,7 +201,7 @@ export const BARRANQUILLA_LOCATION = {
   detail: 'Atención presencial y asesoría personalizada en Barranquilla',
 };
 
-export const DEFAULT_WHATSAPP_NUMBER = '573005550194';
+export const DEFAULT_WHATSAPP_NUMBER = '573046095806';
 
 export function sanitizePhoneNumber(raw: string): string {
   return raw.replace(/\D/g, '');
