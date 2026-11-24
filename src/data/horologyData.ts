@@ -349,6 +349,3 @@ export function buildWhatsAppUrl(
   const clean = sanitizePhoneNumber(phoneNumber);
   return `https://wa.me/${clean}?text=${encodeURIComponent(message)}`;
 }
-  const cleanNumber = sanitizePhoneNumber(phoneNumber) || DEFAULT_WHATSAPP_NUMBER;
-  return `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
-}
